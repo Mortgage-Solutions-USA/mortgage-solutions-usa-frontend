@@ -48,7 +48,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/about-us" render={(props) => <AboutUs {...props} />} />
+      {/* <Route path="/about-us" render={(props) => <AboutUs {...props} />} />
       <Route path="/blog-post" render={(props) => <BlogPost {...props} />} />
       <Route path="/blog-posts" render={(props) => <BlogPosts {...props} />} />
       <Route path="/contact-us" render={(props) => <ContactUs {...props} />} />
@@ -66,9 +66,9 @@ root.render(
       <Route
         path="/presentation"
         render={(props) => <Presentation {...props} />}
-      />
-      <Route path="/home" render={(props) => <Home {...props} />} />
-      <Route path="/pricing" render={(props) => <Pricing {...props} />} />
+      /> */}
+      <Route path="/" render={(props) => <Home {...props} />} />
+      {/* <Route path="/pricing" render={(props) => <Pricing {...props} />} />
       <Route
         path="/product-page"
         render={(props) => <ProductPage {...props} />}
@@ -78,8 +78,8 @@ root.render(
         render={(props) => <ProfilePage {...props} />}
       />
       <Route path="/sections" render={(props) => <Sections {...props} />} />
-      <Route path="/sign-up" render={(props) => <SignupPage {...props} />} />
-      <Redirect to="/home" />
+      <Route path="/sign-up" render={(props) => <SignupPage {...props} />} /> */}
+      <Redirect to="/" />
     </Switch>
   </BrowserRouter>
 );
