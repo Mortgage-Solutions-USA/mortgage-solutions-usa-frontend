@@ -10,12 +10,12 @@ import {
   Container,
   Row,
   Col,
-  NavbarBrand,
 } from "reactstrap";
 
 import bgVideo from "assets/img/columbia-skyline.mp4";
 
-import img from "../assets/img/logo2.png";
+// import img from "../assets/img/logo2.png";
+import headerLogo from "../assets/img/msa-header-logo.png";
 
 import "../assets/css/Home.css";
 
@@ -100,10 +100,10 @@ const Home = () => {
                 </button>
               </div>
               <Collapse navbar isOpen={navbarOpen1}>
-                <NavbarBrand to="/" id="navbar-brand">
+                {/* <NavbarBrand to="/" id="navbar-brand">
                   <img src={img} alt="logo" style={{ width: "125px" }} />
-                </NavbarBrand>
-                <Nav className="mx-auto" navbar>
+                </NavbarBrand> */}
+                <Nav className="mx-auto" navbar style={{ paddingLeft: "14%" }}>
                   <NavItem>
                     <Button
                       className="nav-link"
@@ -150,18 +150,22 @@ const Home = () => {
                 </video>
               </div>
             </div>
-            <Container>
-              <Row>
-                <Col className="ml-auto mr-auto text-center" md="8">
-                  <h1 className="h1-seo">Mortgage Solutions USA</h1>
-                  <h3 className="description">
-                    Brokering Loans for Better Solutions
-                    <br />
-                    NMLS #2116859
-                  </h3>
-                </Col>
-              </Row>
-            </Container>
+            {/* <div style={{ height: "100vh" }}> */}
+            <div className="overlay">
+              <Container style={{ height: "100vh" }}>
+                <Row>
+                  <Col className="ml-auto mr-auto text-center" md="8">
+                    <img src={headerLogo} alt="logo" style={{ width: "75%" }} />
+                    <h3 className="description">
+                      Brokering Loans for Better Solutions
+                      <br />
+                      NMLS #2116859
+                    </h3>
+                  </Col>
+                </Row>
+              </Container>
+            </div>
+            {/* </div> */}
           </div>
         </div>
       </div>

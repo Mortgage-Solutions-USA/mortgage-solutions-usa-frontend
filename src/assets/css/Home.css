@@ -1,74 +1,79 @@
-.page-header-image{
-    position: absolute;
-    background-size: cover;
-    background-position: center center;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
-.page-header-video-wrapper{
-    /* Telling our absolute positioned video to 
+.page-header-video-wrapper {
+  /* Telling our absolute positioned video to 
 be relative to this element */
-position: relative;
-/* Will not allow the video to overflow the 
+  position: relative;
+  /* Will not allow the video to overflow the 
 container */
-overflow: hidden;
+  overflow: hidden;
 
-/* Centering the container's content vertically 
+  /* Centering the container's content vertically 
 and horizontally */
-text-align: center;
-display: flex;
-align-items: center;
-justify-content: center;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 .page-header .page-header-image {
-    position: absolute;
-    background-size: cover;
-    background-position: center center;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+  position: absolute;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
   overflow: hidden;
   text-align: center;
-display: flex;
-align-items: center;
-justify-content: center; }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    video{
-      position: absolute;
-      top: 0;
-      left: 0;
-      object-fit: cover;
-      height: 100%;
-      width: 100%;
-    }
+video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
 
-    .h1-seo{
-      background: #eaf3ff;
-        background: -moz-linear-gradient(top, #FFFFFF 35%, #75a6c3 100%);
-        background: -webkit-linear-gradient(top, #FFFFFF 35%, #75a6c3 100%);
-        background: linear-gradient(to bottom, #FFFFFF 35%, #75a6c3 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+.h1-seo {
+  background: #eaf3ff;
+  background: -moz-linear-gradient(top, #ffffff 35%, #75a6c3 100%);
+  background: -webkit-linear-gradient(top, #ffffff 35%, #75a6c3 100%);
+  background: linear-gradient(to bottom, #ffffff 35%, #75a6c3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-  .h1-seo {
+.h1-seo {
   font-size: 10rem;
   text-transform: uppercase;
   font-weight: 700;
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: "Open Sans Condensed", sans-serif;
   z-index: 1;
   letter-spacing: -10px;
   text-align: center;
   background: #ffedea;
-  background: -moz-linear-gradient(top, #FFFFFF 35%, #c38775 100%);
-  background: -webkit-linear-gradient(top, #FFFFFF 35%, #c38775 100%);
-  background: linear-gradient(to bottom, #FFFFFF 35%, #c38775 100%);
+  background: -moz-linear-gradient(top, #ffffff 35%, #c38775 100%);
+  background: -webkit-linear-gradient(top, #ffffff 35%, #c38775 100%);
+  background: linear-gradient(to bottom, #ffffff 35%, #c38775 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   opacity: 0.5;
+}
+
+.overlay {
+  /* position: fixed; */
+  width: 100%;
+  height: 100%;
+
+  padding-top: 90px;
+
+  background-color: rgba(255, 255, 255, 0.4);
+  z-index: 2;
+  /* cursor: pointer; */
 }
