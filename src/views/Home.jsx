@@ -247,7 +247,7 @@ const Home = () => {
                   <NavItem>
                     <Button
                       className="nav-link"
-                      color={findLoanButtonColor}
+                      color="danger"
                       onClick={toggleModal}
                     >
                       <p>Find a Loan</p>
