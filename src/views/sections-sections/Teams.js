@@ -721,7 +721,7 @@ function Teams() {
           <Container>
             <Row>
               <Col className="ml-auto mr-auto text-center" md="8">
-                <h2 className="title">The Executive Team 5</h2>
+                <h2 className="title">The </h2>
                 <h4 className="description">
                   This is the paragraph where you can write more details about
                   your team. Keep you user engaged by providing meaningful
