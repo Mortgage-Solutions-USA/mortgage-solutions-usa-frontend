@@ -26,6 +26,7 @@ import FileUploader from "./index-sections/FileUploader.js";
 import Carousel from "./index-sections/Carousel.js";
 import NucleoIcons from "./index-sections/NucleoIcons.js";
 
+
 function Index() {
   React.useEffect(() => {
     document.body.classList.add("index-page");
@@ -62,6 +63,7 @@ function Index() {
           <Carousel />
           <NucleoIcons />
           <FooterBlack />
+
         </div>
       </div>
     </>
