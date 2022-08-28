@@ -454,12 +454,12 @@ function Ecommerce() {
                     <Col lg="4" md="6">
                       <Card className="card-product card-plain">
                         <div className="card-image">
-                          <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                          {/* <a href="#pablo" onClick={(e) => e.preventDefault()}>
                             <img
                               alt="..."
                               src={require("assets/img/wooyoungmi.jpg")}
                             ></img>
-                          </a>
+                          </a> */}
                         </div>
                         <CardBody>
                           <a href="#pablo" onClick={(e) => e.preventDefault()}>

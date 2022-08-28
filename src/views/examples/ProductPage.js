@@ -607,13 +607,13 @@ function ProductPage() {
               <Col md="3" sm="6">
                 <Card className="card-product">
                   <div className="card-image">
-                    <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                    {/* <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       <img
                         alt="..."
                         className="img rounded"
                         src={require("assets/img/wooyoungmi.jpg")}
                       ></img>
-                    </a>
+                    </a> */}
                   </div>
                   <CardBody>
                     <h6 className="category text-muted">Popular</h6>

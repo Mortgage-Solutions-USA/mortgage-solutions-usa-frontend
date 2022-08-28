@@ -30,6 +30,7 @@ import {
 import Select from "react-select";
 
 import bgVideo from "assets/img/home-vid-bg.mp4";
+import bgImage from "assets/img/home-vid-bg.jpg";
 
 // import img from "../assets/img/logo2.png";
 import headerLogo from "../assets/img/msa-header-logo.png";
@@ -295,7 +296,11 @@ const Home = () => {
                   poster="../assets/img/columbia-skyline.png"
                 >
                   <source src={bgVideo} type="video/mp4" />
-                  browser not supported
+                  <img
+                    src={bgImage}
+                    title="Your browser does not support the <video> tag"
+                    alt="Your browser does not support the <video> tag"
+                  />
                 </video>
               </div>
             </div>
