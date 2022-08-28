@@ -335,7 +335,7 @@ const Home = () => {
                   <Col className="text-center">
                     <h2>
                       YOUR{" "}
-                      <span className="text-success">
+                      <span className="text-success" style={{ width: "100%" }}>
                         <strong>TRUSTED</strong>
                       </span>{" "}
                       MORTGAGE EXPERTS
