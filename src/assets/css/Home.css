@@ -77,3 +77,9 @@ video {
   z-index: 2;
   /* cursor: pointer; */
 }
+
+@media (max-width: 576px) {
+  .text-success {
+    font-size: 200% !important;
+  }
+}
