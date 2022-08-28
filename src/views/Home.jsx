@@ -26,6 +26,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
+import { useForm, ValidationError } from "@formspree/react";
 
 import Select from "react-select";
 
@@ -40,7 +41,8 @@ import "../assets/css/Home.css";
 const Home = () => {
   // navbar collapses states and functions
   const [navbarOpen1, setNavbarOpen1] = useState(false);
-
+  const [formState, handleSubmit] = useForm("mgeqvpgq");
+  const [checked, setChecked] = useState(false);
   const [navbarColor, setNavbarColor] = useState(
     (document.documentElement.scrollTop > 499 || document.body.scrollTop) > 499
       ? ""
@@ -57,6 +59,10 @@ const Home = () => {
   //     ? "green"
   //     : "white"
   // );
+
+  const handleRobotCheck = () => {
+    setChecked(!checked);
+  };
 
   const [text, setText] = useState({
     showMore1: false,
@@ -586,7 +592,7 @@ const Home = () => {
                   </p>
 
                   <a
-                    classoName="btn btn-danger"
+                    className="btn btn-danger"
                     href={ashley.url}
                     color="danger"
                   >
@@ -666,105 +672,129 @@ const Home = () => {
             </Col>
             <Col className="ml-auto mr-auto" md="5">
               <Card className="card-contact card-raised">
-                <Form id="contact-form1" method="post" role="form">
-                  <CardHeader className="text-center">
-                    <CardTitle tag="h4">Contact Us</CardTitle>
-                  </CardHeader>
-                  <CardBody>
-                    <Row>
-                      <Col className="pr-2" md="6">
-                        <label>First name</label>
-                        <InputGroup
-                          className={first1Focus ? "input-group-focus" : ""}
-                        >
-                          <InputGroupAddon addonType="prepend">
-                            <InputGroupText>
-                              <i className="now-ui-icons users_circle-08"></i>
-                            </InputGroupText>
-                          </InputGroupAddon>
-                          <Input
-                            aria-label="First Name..."
-                            autoComplete="given-name"
-                            placeholder="First Name..."
-                            type="text"
-                            onFocus={() => setFirst1Focus(true)}
-                            onBlur={() => setFirst1Focus(false)}
-                          ></Input>
-                        </InputGroup>
-                      </Col>
-                      <Col className="pl-2" md="6">
-                        <FormGroup>
-                          <label>Last name</label>
+                {formState.succeeded ? (
+                  <div className="card">
+                    <nav className="navbar navbar-dark bg-success"></nav>
+                    <i className="fas fa-bell fa-4x animated rotateIn mb-4"></i>
+                    <div className="card-body">
+                      <h5 className="card-title">Card title</h5>
+                      <p className="card-text">
+                        Some quick example text to build on the card title and
+                        make up the bulk of the card's content.
+                      </p>
+                      <a href="#" className="btn btn-primary">
+                        Go somewhere
+                      </a>
+                    </div>
+                  </div>
+                ) : (
+                  <Form
+                    onSubmit={handleSubmit}
+                    id="contact-form1"
+                    method="post"
+                    role="form"
+                  >
+                    <CardHeader className="text-center">
+                      <CardTitle tag="h4">Contact Us</CardTitle>
+                    </CardHeader>
+                    <CardBody>
+                      <Row>
+                        <Col className="pr-2">
+                          <label htmlFor="name">Name</label>
                           <InputGroup
-                            className={last1Focus ? "input-group-focus" : ""}
+                            className={first1Focus ? "input-group-focus" : ""}
                           >
                             <InputGroupAddon addonType="prepend">
                               <InputGroupText>
-                                <i className="now-ui-icons text_caps-small"></i>
+                                <i className="now-ui-icons users_circle-08"></i>
                               </InputGroupText>
                             </InputGroupAddon>
                             <Input
-                              aria-label="Last Name..."
-                              autoComplete="family-name"
-                              placeholder="Last Name..."
+                              aria-label="Full Name..."
+                              autoComplete="given-name"
+                              placeholder="Full Name..."
                               type="text"
-                              onFocus={() => setLast1Focus(true)}
-                              onBlur={() => setLast1Focus(false)}
+                              id="name"
+                              name="name"
+                              onFocus={() => setFirst1Focus(true)}
+                              onBlur={() => setFirst1Focus(false)}
                             ></Input>
+                            <ValidationError
+                              prefix="name"
+                              field="name"
+                              errors={formState.errors}
+                            />
                           </InputGroup>
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <FormGroup>
-                      <label>Email address</label>
-                      <InputGroup
-                        className={email1Focus ? "input-group-focus" : ""}
-                      >
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="now-ui-icons ui-1_email-85"></i>
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input
-                          autoComplete="email"
-                          placeholder="Email Here..."
-                          type="email"
-                          onFocus={() => setEmail1Focus(true)}
-                          onBlur={() => setEmail1Focus(false)}
-                        ></Input>
-                      </InputGroup>
-                    </FormGroup>
-                    <FormGroup>
-                      <label>Your message</label>
-                      <Input
-                        id="message"
-                        name="message"
-                        rows="6"
-                        type="textarea"
-                      ></Input>
-                    </FormGroup>
-                    <Row>
-                      <Col md="6">
-                        <FormGroup check>
-                          <Label check>
-                            <Input type="checkbox"></Input>
-                            <span className="form-check-sign"></span>
-                            I'm not a robot
-                          </Label>
-                        </FormGroup>
-                      </Col>
-                      <Col md="6">
-                        <Button
-                          className="btn-round pull-right"
-                          color="info"
-                          type="submit"
+                        </Col>
+                      </Row>
+                      <FormGroup>
+                        <label htmlFor="email">Email address</label>
+                        <InputGroup
+                          className={email1Focus ? "input-group-focus" : ""}
                         >
-                          Send Message
-                        </Button>
-                      </Col>
-                    </Row>
-                  </CardBody>
-                </Form>
+                          <InputGroupAddon addonType="prepend">
+                            <InputGroupText>
+                              <i className="now-ui-icons ui-1_email-85"></i>
+                            </InputGroupText>
+                          </InputGroupAddon>
+                          <Input
+                            autoComplete="email"
+                            placeholder="Email Here..."
+                            type="email"
+                            id="email"
+                            name="email"
+                            onFocus={() => setEmail1Focus(true)}
+                            onBlur={() => setEmail1Focus(false)}
+                          ></Input>
+                          <ValidationError
+                            prefix="Email"
+                            field="email"
+                            errors={formState.errors}
+                          />
+                        </InputGroup>
+                      </FormGroup>
+                      <FormGroup>
+                        <label htmlFor="message">Your message</label>
+                        <Input
+                          id="message"
+                          name="message"
+                          rows="6"
+                          type="textarea"
+                        ></Input>
+                        <ValidationError
+                          prefix="Message"
+                          field="message"
+                          errors={formState.errors}
+                        />
+                      </FormGroup>
+                      <Row>
+                        <Col md="6">
+                          <FormGroup check>
+                            <Label check>
+                              <Input
+                                type="checkbox"
+                                checked={checked}
+                                onChange={handleRobotCheck}
+                              ></Input>
+                              <span className="form-check-sign"></span>
+                              I'm not a robot
+                            </Label>
+                          </FormGroup>
+                        </Col>
+                        <Col md="6">
+                          <Button
+                            className="btn-round pull-right"
+                            color="info"
+                            type="submit"
+                            disabled={!checked || formState.isSubmitting}
+                          >
+                            Send Message
+                          </Button>
+                        </Col>
+                      </Row>
+                    </CardBody>
+                  </Form>
+                )}
               </Card>
             </Col>
           </Row>
