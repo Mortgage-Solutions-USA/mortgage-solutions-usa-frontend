@@ -25,21 +25,7 @@ import "assets/demo/demo.css?v=1.5.0";
 import "assets/demo/react-demo.css?v=1.5.0";
 import "assets/demo/nucleo-icons-page-styles.css?v=1.5.0";
 // pages
-import AboutUs from "views/examples/AboutUs.js";
-import BlogPost from "views/examples/BlogPost.js";
-import BlogPosts from "views/examples/BlogPosts.js";
-import ContactUs from "views/examples/ContactUs.js";
-import Ecommerce from "views/examples/Ecommerce.js";
-import Index from "views/Index.js";
-import LandingPage from "views/examples/LandingPage.js";
-import LoginPage from "views/examples/LoginPage.js";
-import NucleoIcons from "views/NucleoIcons.js";
-import Presentation from "views/Presentation.js";
-import Pricing from "views/examples/Pricing.js";
-import ProductPage from "views/examples/ProductPage.js";
-import ProfilePage from "views/examples/ProfilePage.js";
-import Sections from "views/Sections.js";
-import SignupPage from "views/examples/SignupPage.js";
+
 import Home from "views/Home.jsx";
 // others
 

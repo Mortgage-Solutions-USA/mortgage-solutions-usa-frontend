@@ -21,25 +21,19 @@ import {
   InputGroupAddon,
   InputGroupText,
   CardHeader,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
 } from "reactstrap";
 import { useForm, ValidationError } from "@formspree/react";
-
-import Select from "react-select";
 
 import bgVideo from "assets/img/home-vid-bg.mp4";
 import bgImage from "assets/img/home-vid-bg.jpg";
 
-// import img from "../assets/img/logo2.png";
+import teamInfo from "central-hub";
+
 import headerLogo from "../assets/img/msa-header-logo.png";
 
 import "../assets/css/Home.css";
 
 const Home = () => {
-  // navbar collapses states and functions
   const [navbarOpen1, setNavbarOpen1] = useState(false);
   const [formState, handleSubmit] = useForm("mgeqvpgq");
   const [checked, setChecked] = useState(false);
@@ -54,12 +48,6 @@ const Home = () => {
       : "neutral"
   );
 
-  // const [homeButtonColor, setHomeButtonColor] = useState(
-  //   (document.documentElement.scrollTop > 499 || document.body.scrollTop) > 499
-  //     ? "green"
-  //     : "white"
-  // );
-
   const handleRobotCheck = () => {
     setChecked(!checked);
   };
@@ -71,52 +59,9 @@ const Home = () => {
   });
 
   const [first1Focus, setFirst1Focus] = useState(false);
-  const [last1Focus, setLast1Focus] = useState(false);
   const [email1Focus, setEmail1Focus] = useState(false);
-  const [modal, setModal] = useState(false);
-  const [singleSelect, setSingleSelect] = useState(null);
 
-  const [nucleoFocusInterest, setNucleoFocusInterest] = useState(false);
-
-  const [nucleoFocusLoanAmount, setNucleoFocusLoanAmount] = useState(false);
-  const [nucleoFocusTermYrs, setNucleoFocusTermYrs] = useState(false);
-  const [nucleoFocusTermMths, setNucleoFocusTermMths] = useState(false);
-
-  const toggleModal = () => setModal(!modal);
-
-  const teamInfo = {
-    dave: {
-      name: "Dave Andrews",
-      title: "Mortgage Load Broker / Originator",
-      license: "NMLS # 305069",
-      img: "../assets/img/dave-headshot.png",
-      url: "https://dave.zipforhome.com/",
-      desc: "As you consider selling, buying, refinancing, or even building your dream home, there is a lot riding on your mortgage banker. With mortgage programs and market conditions changing constantly, you need to make sure you are working with a skilled professional who can respond to you quickly. As an experienced mortgage banker, I understand everyone&#39;s financial situation is different and should be treated as such, I am committed to providing my customers with mortgage services that exceed their expectations. I have the knowledge and expertise you need to make the right choice for you and your family. I look forward to working with you!",
-    },
-    katelynn: {
-      name: "Katelynn Frank",
-      title: "Mortgage Load Originator",
-      license: "NMLS # 2029470",
-      img: "../assets/img/katelynn-headshot.png",
-      url: "https://katelynn.zipforhome.com/",
-      desc: "Hello, I am Katelynn Frank a born and raised resident of Mid Missouri. My husband and I moved our family to Eldon, Missouri in 2021 and we love our community! I have been in the mortgage industry since January of 2021 and am happy to say that I have finally found a career where my heart belongs. After years of a career in the medical field, it in ingrained in me to serve, help, and solve for people and families. My promise to you as my client is to listen, communicate, and work to find the best loan product for your individual needs, all while making the process of purchasing your dream home or refinancing your forever home as seamless and stress free as possible! I truly look forward to working with you and your family to make the dream of home ownership a reality. Let&#39;s get started! ",
-    },
-    ashley: {
-      name: "Ashley Taillon",
-      title: "Director of Marketing / Mortgage Loan Originator",
-      license: "NMLS # 2375078",
-      img: "../assets/img/ashley-headshot.png",
-      url: "https://ashley.zipforhome.com/",
-      desc: "My name is Ashley Taillon! I have been in the mortgage industry for 3 years now! I started as a loan officer assistant, and then moved to processing making me involved in all of the back end work that goes on with your mortgage! I am now a licensed mortgage loan originator!I am originally from upstate New York. I moved to Columbia, Missouri in September of 2018 and love it! Missouri is my new home. I am a cat mom to two big furballs named Ozzy and Lola. I like camping in tents, hiking, swimming, bike riding, singing, doing yoga, and of course, playing with my kitty cats! I am looking forward to helping you reach your dreams revolving around your home purchase or refinance! You deserve to feel at home and the help of an honest lender. My vow to you is just that.",
-    },
-    chad: {
-      name: "Chad",
-      url: "https://chad.zipforhome.com/",
-      img: "../assets/img/chad-headshot.png",
-    },
-  };
-
-  const { dave, katelynn, ashley } = teamInfo;
+  const { dave, ashley, katelynn } = teamInfo;
 
   useEffect(() => {
     const updateNavbarColor = () => {
@@ -126,14 +71,12 @@ const Home = () => {
       ) {
         setNavbarColor("");
         setFindLoanButtonColor("info");
-        // setHomeButtonColor("#000000");
       } else if (
         document.documentElement.scrollTop < 500 ||
         document.body.scrollTop < 500
       ) {
         setNavbarColor(" navbar-transparent");
         setFindLoanButtonColor("danger");
-        // setHomeButtonColor("#ffffff");
       }
     };
     window.addEventListener("scroll", updateNavbarColor);
@@ -144,83 +87,6 @@ const Home = () => {
 
   return (
     <>
-      <Modal style={{ marginTop: "10%" }} isOpen={modal} toggle={toggleModal}>
-        <ModalHeader>Loan Finder</ModalHeader>
-        <ModalBody>
-          <InputGroup
-            className={nucleoFocusLoanAmount ? "input-group-focus" : ""}
-          >
-            <Input
-              placeholder="Loan Amount"
-              type="number"
-              onFocus={() => setNucleoFocusLoanAmount(true)}
-              onBlur={() => setNucleoFocusLoanAmount(false)}
-            ></Input>
-            <InputGroupAddon addonType="append">
-              <InputGroupText>%</InputGroupText>
-            </InputGroupAddon>
-          </InputGroup>
-          <InputGroup className={nucleoFocusTermYrs ? "input-group-focus" : ""}>
-            <Input
-              placeholder="Loan Term Years"
-              type="number"
-              onFocus={() => setNucleoFocusTermYrs(true)}
-              onBlur={() => setNucleoFocusTermYrs(false)}
-            ></Input>
-            <InputGroupAddon addonType="append">
-              <InputGroupText>%</InputGroupText>
-            </InputGroupAddon>
-          </InputGroup>
-          <InputGroup
-            className={nucleoFocusTermMths ? "input-group-focus" : ""}
-          >
-            <Input
-              placeholder="Loan Term Months"
-              type="number"
-              onFocus={() => setNucleoFocusTermMths(true)}
-              onBlur={() => setNucleoFocusTermMths(false)}
-            ></Input>
-            <InputGroupAddon addonType="append">
-              <InputGroupText>%</InputGroupText>
-            </InputGroupAddon>
-          </InputGroup>
-          <InputGroup
-            className={nucleoFocusInterest ? "input-group-focus" : ""}
-          >
-            <Input
-              placeholder="Interest Rate"
-              type="number"
-              onFocus={() => setNucleoFocusInterest(true)}
-              onBlur={() => setNucleoFocusInterest(false)}
-            ></Input>
-            <InputGroupAddon addonType="append">
-              <InputGroupText>%</InputGroupText>
-            </InputGroupAddon>
-          </InputGroup>
-          <Select
-            className="react-select react-select-info mt-2"
-            onChange={(value) => setSingleSelect(value)}
-            classNamePrefix="react-select"
-            placeholder="Compounding Frequency"
-            value={singleSelect}
-            name="compound"
-            options={[
-              { value: "0", label: "ANNUALLY (APY)" },
-              { value: "1", label: "SEMI-ANNUALLY" },
-              { value: "2", label: "QUARTELY" },
-              { value: "3", label: "MONTHLY (APR)" },
-            ]}
-          ></Select>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="danger" onClick={toggleModal}>
-            CANCEL
-          </Button>{" "}
-          <Button color="success" onClick={toggleModal}>
-            CALCULATE
-          </Button>
-        </ModalFooter>
-      </Modal>
       {navbarOpen1 ? (
         <div
           id="bodyClick"
@@ -230,67 +96,61 @@ const Home = () => {
           }}
         />
       ) : null}
+      <Navbar className={"fixed-top" + navbarColor} color="white" expand="lg">
+        <Container>
+          <div className="navbar-translate">
+            <button
+              aria-expanded={navbarOpen1}
+              className="navbar-toggler"
+              data-toggle="collapse"
+              type="button"
+              onClick={() => {
+                document.documentElement.classList.toggle("nav-open");
+                setNavbarOpen1(!navbarOpen1);
+              }}
+            >
+              <span className="navbar-toggler-bar bar1"></span>
+              <span className="navbar-toggler-bar bar2"></span>
+              <span className="navbar-toggler-bar bar3"></span>
+            </button>
+          </div>
+          <Collapse navbar isOpen={navbarOpen1}>
+            <Nav className="mx-auto" navbar style={{ paddingLeft: "14%" }}>
+              <NavItem>
+                <Button className="nav-link" href="#">
+                  <p>Find a Loan</p>
+                </Button>
+              </NavItem>
+              <NavItem>
+                <Button
+                  className="nav-link"
+                  color="danger"
+                  href="https://msusa.zipforhome.com/CompanySite/LoanOfficers"
+                >
+                  <p>Apply Now</p>
+                </Button>
+              </NavItem>
+              {/* <NavItem>
+                <NavLink href="#pablo" target="_blank">
+                  <i className="fab fa-twitter"></i>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="#pablo" target="_blank">
+                  <i className="fab fa-facebook-square"></i>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="#pablo" target="_blank">
+                  <i className="fab fa-instagram"></i>
+                </NavLink>
+              </NavItem> */}
+            </Nav>
+          </Collapse>
+        </Container>
+      </Navbar>
       <div className="cd-section" id="headers">
         <div className="header-2">
-          <Navbar
-            className={"fixed-top" + navbarColor}
-            color="white"
-            expand="lg"
-          >
-            <Container>
-              <div className="navbar-translate">
-                <button
-                  aria-expanded={navbarOpen1}
-                  className="navbar-toggler"
-                  data-toggle="collapse"
-                  type="button"
-                  onClick={() => {
-                    document.documentElement.classList.toggle("nav-open");
-                    setNavbarOpen1(!navbarOpen1);
-                  }}
-                >
-                  <span className="navbar-toggler-bar bar1"></span>
-                  <span className="navbar-toggler-bar bar2"></span>
-                  <span className="navbar-toggler-bar bar3"></span>
-                </button>
-              </div>
-              <Collapse navbar isOpen={navbarOpen1}>
-                <Nav className="mx-auto" navbar style={{ paddingLeft: "14%" }}>
-                  <NavItem>
-                    <Button className="nav-link" onClick={toggleModal}>
-                      <p>Find a Loan</p>
-                    </Button>
-                  </NavItem>
-                  <NavItem>
-                    <Button
-                      className="nav-link"
-                      color="danger"
-                      href="https://msusa.zipforhome.com/CompanySite/LoanOfficers"
-                    >
-                      <p>Apply Now</p>
-                    </Button>
-                  </NavItem>
-                </Nav>
-                <Nav className="nav navbar-right" navbar>
-                  <NavItem>
-                    <NavLink href="#pablo" target="_blank">
-                      <i className="fab fa-twitter"></i>
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink href="#pablo" target="_blank">
-                      <i className="fab fa-facebook-square"></i>
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink href="#pablo" target="_blank">
-                      <i className="fab fa-instagram"></i>
-                    </NavLink>
-                  </NavItem>
-                </Nav>
-              </Collapse>
-            </Container>
-          </Navbar>
           <div className="page-header header-filter">
             <div className="page-header-image">
               <div className=".page-header-video-wrapper">
@@ -673,20 +533,14 @@ const Home = () => {
             <Col className="ml-auto mr-auto" md="5">
               <Card className="card-contact card-raised">
                 {formState.succeeded ? (
-                  <div className="card">
-                    <nav className="navbar navbar-dark bg-success"></nav>
-                    <i className="fas fa-bell fa-4x animated rotateIn mb-4"></i>
-                    <div className="card-body">
-                      <h5 className="card-title">Card title</h5>
-                      <p className="card-text">
-                        Some quick example text to build on the card title and
-                        make up the bulk of the card's content.
-                      </p>
-                      <a href="#" className="btn btn-primary">
-                        Go somewhere
-                      </a>
-                    </div>
-                  </div>
+                  <>
+                    <i className="fa-solid fa-4x fa-paper-plane"></i>
+                    <h5 className="text-center">Card title</h5>
+                    <p className="text-center">
+                      Some quick example text to build on the card title and
+                      make up the bulk of the card's content.
+                    </p>
+                  </>
                 ) : (
                   <Form
                     onSubmit={handleSubmit}
