@@ -91,7 +91,7 @@ const Loanfinder = () => {
           }}
         />
       ) : null}
-      <Navbar className={"pt-0 fixed-top" + navbarColor} expand="lg">
+      <Navbar className={"fixed-top" + navbarColor} expand="lg">
         <Container>
           <div className="navbar-translate">
             <button
