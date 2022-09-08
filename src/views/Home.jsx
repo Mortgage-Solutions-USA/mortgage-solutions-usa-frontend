@@ -130,7 +130,9 @@ const Home = () => {
                   <p>Apply Now</p>
                 </Button>
               </NavItem>
-              {/* <NavItem>
+            </Nav>
+            <Nav navbar>
+              <NavItem>
                 <NavLink href="#pablo" target="_blank">
                   <i className="fab fa-twitter"></i>
                 </NavLink>
@@ -144,7 +146,7 @@ const Home = () => {
                 <NavLink href="#pablo" target="_blank">
                   <i className="fab fa-instagram"></i>
                 </NavLink>
-              </NavItem> */}
+              </NavItem>
             </Nav>
           </Collapse>
         </Container>
