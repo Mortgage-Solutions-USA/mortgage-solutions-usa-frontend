@@ -111,11 +111,13 @@ const Home = () => {
           <Collapse navbar isOpen={navbarOpen1}>
             <Nav className="mx-auto" navbar style={{ paddingLeft: "14%" }}>
               <NavItem>
-                <Button className="nav-link">
-                  <Link to="/loans" style={{ textDecoration: "none" }}>
-                    Find a Loan
-                  </Link>
-                </Button>
+                <Link
+                  className="nav-link btn"
+                  to="/loans"
+                  style={{ textDecoration: "none" }}
+                >
+                  Find a Loan
+                </Link>
               </NavItem>
               <NavItem>
                 <Button
@@ -532,11 +534,12 @@ const Home = () => {
               <Card className="card-contact card-raised">
                 {formState.succeeded ? (
                   <>
-                    <i className="fa-solid fa-4x fa-paper-plane"></i>
-                    <h5 className="text-center">Card title</h5>
+                    <div className="m-5 text-center text-success">
+                      <i className="fas fa-6x fa-paper-plane"></i>
+                    </div>
+                    <h5 className="text-center">Sent</h5>
                     <p className="text-center">
-                      Some quick example text to build on the card title and
-                      make up the bulk of the card's content.
+                      Your message has been sent. We will be in touch shortly.
                     </p>
                   </>
                 ) : (

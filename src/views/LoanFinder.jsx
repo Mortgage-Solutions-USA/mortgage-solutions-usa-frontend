@@ -81,7 +81,7 @@ const Loanfinder = () => {
   };
 
   return (
-    <div className="bg-dark" style={{ height: "100%" }}>
+    <div style={{ height: "100%", backgroundColor: "#b9b9b9" }}>
       {navbarOpen1 ? (
         <div
           id="bodyClick"
@@ -99,14 +99,10 @@ const Loanfinder = () => {
               className="navbar-toggler"
               data-toggle="collapse"
               type="button"
-              onClick={() => {
-                document.documentElement.classList.toggle("nav-open");
-                setNavbarOpen1(!navbarOpen1);
-              }}
             >
-              <span className="navbar-toggler-bar bar1"></span>
-              <span className="navbar-toggler-bar bar2"></span>
-              <span className="navbar-toggler-bar bar3"></span>
+              <Link to="/">
+                <i className="fas fa-chevron-left text-light"></i>
+              </Link>
             </button>
           </div>
           <Collapse navbar isOpen={navbarOpen1}>
