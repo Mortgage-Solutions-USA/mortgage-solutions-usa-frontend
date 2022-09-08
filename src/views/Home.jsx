@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   Button,
   Card,
@@ -42,11 +43,6 @@ const Home = () => {
       ? ""
       : " navbar-transparent"
   );
-  const [findLoanButtonColor, setFindLoanButtonColor] = useState(
-    (document.documentElement.scrollTop > 499 || document.body.scrollTop) > 499
-      ? "info"
-      : "neutral"
-  );
 
   const handleRobotCheck = () => {
     setChecked(!checked);
@@ -70,13 +66,11 @@ const Home = () => {
         document.body.scrollTop > 499
       ) {
         setNavbarColor("");
-        setFindLoanButtonColor("info");
       } else if (
         document.documentElement.scrollTop < 500 ||
         document.body.scrollTop < 500
       ) {
         setNavbarColor(" navbar-transparent");
-        setFindLoanButtonColor("danger");
       }
     };
     window.addEventListener("scroll", updateNavbarColor);
@@ -117,8 +111,10 @@ const Home = () => {
           <Collapse navbar isOpen={navbarOpen1}>
             <Nav className="mx-auto" navbar style={{ paddingLeft: "14%" }}>
               <NavItem>
-                <Button className="nav-link" href="#">
-                  <p>Find a Loan</p>
+                <Button className="nav-link">
+                  <Link to="/loans" style={{ textDecoration: "none" }}>
+                    Find a Loan
+                  </Link>
                 </Button>
               </NavItem>
               <NavItem>
@@ -127,7 +123,7 @@ const Home = () => {
                   color="danger"
                   href="https://msusa.zipforhome.com/CompanySite/LoanOfficers"
                 >
-                  <p>Apply Now</p>
+                  Apply Now
                 </Button>
               </NavItem>
             </Nav>

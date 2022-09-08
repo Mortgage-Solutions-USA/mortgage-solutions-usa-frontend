@@ -15,7 +15,7 @@
 
 */
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
 // styles
@@ -27,11 +27,9 @@ import "assets/demo/nucleo-icons-page-styles.css?v=1.5.0";
 // pages
 
 import Home from "views/Home.jsx";
-// others
+import Loanfinder from "views/LoanFinder";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(
+ReactDOM.render(
   <BrowserRouter>
     <Switch>
       {/* <Route path="/about-us" render={(props) => <AboutUs {...props} />} />
@@ -53,7 +51,8 @@ root.render(
         path="/presentation"
         render={(props) => <Presentation {...props} />}
       /> */}
-      <Route path="/" render={(props) => <Home {...props} />} />
+      <Route exact path="/" render={(props) => <Home {...props} />} />
+      <Route path="/loans" render={(props) => <Loanfinder {...props} />} />
       {/* <Route path="/pricing" render={(props) => <Pricing {...props} />} />
       <Route
         path="/product-page"
@@ -67,5 +66,6 @@ root.render(
       <Route path="/sign-up" render={(props) => <SignupPage {...props} />} /> */}
       <Redirect to="/" />
     </Switch>
-  </BrowserRouter>
+  </BrowserRouter>,
+  document.getElementById("root")
 );
