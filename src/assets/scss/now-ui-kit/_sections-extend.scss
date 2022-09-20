@@ -220,6 +220,14 @@
     padding: 80px 0;
 }
 
+.projects-1 {
+    padding-top: 1% !important;
+    padding-bottom: 1% !important;
+}
+
+html, body, #root, .projects-1{
+    height: 100%;
+}
 
 @import 'sections/_headers';
 @import 'sections/_features';

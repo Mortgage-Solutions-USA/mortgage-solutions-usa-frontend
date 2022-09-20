@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   Button,
   Card,
@@ -21,41 +22,31 @@ import {
   InputGroupAddon,
   InputGroupText,
   CardHeader,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
 } from "reactstrap";
+import { useForm, ValidationError } from "@formspree/react";
 
-import Select from "react-select";
+import bgVideo from "assets/img/home-vid-bg.mp4";
+import bgImage from "assets/img/home-vid-bg.jpg";
 
-import bgVideo from "assets/img/columbia-skyline.mp4";
+import teamInfo from "central-hub";
 
-// import img from "../assets/img/logo2.png";
 import headerLogo from "../assets/img/msa-header-logo.png";
 
 import "../assets/css/Home.css";
 
 const Home = () => {
-  // navbar collapses states and functions
   const [navbarOpen1, setNavbarOpen1] = useState(false);
-
+  const [formState, handleSubmit] = useForm("mgeqvpgq");
+  const [checked, setChecked] = useState(false);
   const [navbarColor, setNavbarColor] = useState(
     (document.documentElement.scrollTop > 499 || document.body.scrollTop) > 499
       ? ""
       : " navbar-transparent"
   );
-  const [findLoanButtonColor, setFindLoanButtonColor] = useState(
-    (document.documentElement.scrollTop > 499 || document.body.scrollTop) > 499
-      ? "info"
-      : "neutral"
-  );
 
-  // const [homeButtonColor, setHomeButtonColor] = useState(
-  //   (document.documentElement.scrollTop > 499 || document.body.scrollTop) > 499
-  //     ? "green"
-  //     : "white"
-  // );
+  const handleRobotCheck = () => {
+    setChecked(!checked);
+  };
 
   const [text, setText] = useState({
     showMore1: false,
@@ -64,44 +55,9 @@ const Home = () => {
   });
 
   const [first1Focus, setFirst1Focus] = useState(false);
-  const [last1Focus, setLast1Focus] = useState(false);
   const [email1Focus, setEmail1Focus] = useState(false);
-  const [modal, setModal] = useState(false);
-  const [singleSelect, setSingleSelect] = useState(null);
 
-  const [nucleoFocusInterest, setNucleoFocusInterest] = useState(false);
-
-  const [nucleoFocusLoanAmount, setNucleoFocusLoanAmount] = useState(false);
-  const [nucleoFocusTermYrs, setNucleoFocusTermYrs] = useState(false);
-  const [nucleoFocusTermMths, setNucleoFocusTermMths] = useState(false);
-
-  const toggleModal = () => setModal(!modal);
-
-  const teamInfo = {
-    dave: {
-      name: "Dave Andrews",
-      title: "Mortgage Load Broker / Originator",
-      license: "NMLS # 305069",
-      img: "../assets/img/dave-headshot.png",
-      desc: "As you consider selling, buying, refinancing, or even building your dream home, there is a lot riding on your mortgage banker. With mortgage programs and market conditions changing constantly, you need to make sure you are working with a skilled professional who can respond to you quickly. As an experienced mortgage banker, I understand everyone&#39;s financial situation is different and should be treated as such, I am committed to providing my customers with mortgage services that exceed their expectations. I have the knowledge and expertise you need to make the right choice for you and your family. I look forward to working with you!",
-    },
-    katelynn: {
-      name: "Katelynn Frank",
-      title: "Mortgage Load Originator",
-      license: "NMLS # 2029470",
-      img: "../assets/img/katelynn-headshot.png",
-      desc: "Hello, I am Katelynn Frank a born and raised resident of Mid Missouri. My husband and I moved our family to Eldon, Missouri in 2021 and we love our community! I have been in the mortgage industry since January of 2021 and am happy to say that I have finally found a career where my heart belongs. After years of a career in the medical field, it in ingrained in me to serve, help, and solve for people and families. My promise to you as my client is to listen, communicate, and work to find the best loan product for your individual needs, all while making the process of purchasing your dream home or refinancing your forever home as seamless and stress free as possible! I truly look forward to working with you and your family to make the dream of home ownership a reality. Let&#39;s get started! ",
-    },
-    ashley: {
-      name: "Ashley Taillon",
-      title: "Director of Marketing / Mortgage Loan Originator",
-      license: "NMLS # 2375078",
-      img: "../assets/img/ashley-headshot.png",
-      desc: "My name is Ashley Taillon! I have been in the mortgage industry for 3 years now! I started as a loan officer assistant, and then moved to processing making me involved in all of the back end work that goes on with your mortgage! I am now a licensed mortgage loan originator!I am originally from upstate New York. I moved to Columbia, Missouri in September of 2018 and love it! Missouri is my new home. I am a cat mom to two big furballs named Ozzy and Lola. I like camping in tents, hiking, swimming, bike riding, singing, doing yoga, and of course, playing with my kitty cats! I am looking forward to helping you reach your dreams revolving around your home purchase or refinance! You deserve to feel at home and the help of an honest lender. My vow to you is just that.",
-    },
-  };
-
-  const { dave, katelynn, ashley } = teamInfo;
+  const { dave, ashley, katelynn } = teamInfo;
 
   useEffect(() => {
     const updateNavbarColor = () => {
@@ -110,15 +66,11 @@ const Home = () => {
         document.body.scrollTop > 499
       ) {
         setNavbarColor("");
-        setFindLoanButtonColor("info");
-        // setHomeButtonColor("#000000");
       } else if (
         document.documentElement.scrollTop < 500 ||
         document.body.scrollTop < 500
       ) {
         setNavbarColor(" navbar-transparent");
-        setFindLoanButtonColor("danger");
-        // setHomeButtonColor("#ffffff");
       }
     };
     window.addEventListener("scroll", updateNavbarColor);
@@ -129,83 +81,6 @@ const Home = () => {
 
   return (
     <>
-      <Modal style={{ marginTop: "10%" }} isOpen={modal} toggle={toggleModal}>
-        <ModalHeader>Loan Finder</ModalHeader>
-        <ModalBody>
-          <InputGroup
-            className={nucleoFocusLoanAmount ? "input-group-focus" : ""}
-          >
-            <Input
-              placeholder="Loan Amount"
-              type="number"
-              onFocus={() => setNucleoFocusLoanAmount(true)}
-              onBlur={() => setNucleoFocusLoanAmount(false)}
-            ></Input>
-            <InputGroupAddon addonType="append">
-              <InputGroupText>%</InputGroupText>
-            </InputGroupAddon>
-          </InputGroup>
-          <InputGroup className={nucleoFocusTermYrs ? "input-group-focus" : ""}>
-            <Input
-              placeholder="Loan Term Years"
-              type="number"
-              onFocus={() => setNucleoFocusTermYrs(true)}
-              onBlur={() => setNucleoFocusTermYrs(false)}
-            ></Input>
-            <InputGroupAddon addonType="append">
-              <InputGroupText>%</InputGroupText>
-            </InputGroupAddon>
-          </InputGroup>
-          <InputGroup
-            className={nucleoFocusTermMths ? "input-group-focus" : ""}
-          >
-            <Input
-              placeholder="Loan Term Months"
-              type="number"
-              onFocus={() => setNucleoFocusTermMths(true)}
-              onBlur={() => setNucleoFocusTermMths(false)}
-            ></Input>
-            <InputGroupAddon addonType="append">
-              <InputGroupText>%</InputGroupText>
-            </InputGroupAddon>
-          </InputGroup>
-          <InputGroup
-            className={nucleoFocusInterest ? "input-group-focus" : ""}
-          >
-            <Input
-              placeholder="Interest Rate"
-              type="number"
-              onFocus={() => setNucleoFocusInterest(true)}
-              onBlur={() => setNucleoFocusInterest(false)}
-            ></Input>
-            <InputGroupAddon addonType="append">
-              <InputGroupText>%</InputGroupText>
-            </InputGroupAddon>
-          </InputGroup>
-          <Select
-            className="react-select react-select-info mt-2"
-            onChange={(value) => setSingleSelect(value)}
-            classNamePrefix="react-select"
-            placeholder="Compounding Frequency"
-            value={singleSelect}
-            name="compound"
-            options={[
-              { value: "0", label: "ANNUALLY (APY)" },
-              { value: "1", label: "SEMI-ANNUALLY" },
-              { value: "2", label: "QUARTELY" },
-              { value: "3", label: "MONTHLY (APR)" },
-            ]}
-          ></Select>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="danger" onClick={toggleModal}>
-            CANCEL
-          </Button>{" "}
-          <Button color="success" onClick={toggleModal}>
-            CALCULATE
-          </Button>
-        </ModalFooter>
-      </Modal>
       {navbarOpen1 ? (
         <div
           id="bodyClick"
@@ -215,65 +90,67 @@ const Home = () => {
           }}
         />
       ) : null}
+      <Navbar className={"fixed-top" + navbarColor} color="white" expand="lg">
+        <Container>
+          <div className="navbar-translate">
+            <button
+              aria-expanded={navbarOpen1}
+              className="navbar-toggler"
+              data-toggle="collapse"
+              type="button"
+              onClick={() => {
+                document.documentElement.classList.toggle("nav-open");
+                setNavbarOpen1(!navbarOpen1);
+              }}
+            >
+              <span className="navbar-toggler-bar bar1"></span>
+              <span className="navbar-toggler-bar bar2"></span>
+              <span className="navbar-toggler-bar bar3"></span>
+            </button>
+          </div>
+          <Collapse navbar isOpen={navbarOpen1}>
+            <Nav className="mx-auto" navbar style={{ paddingLeft: "14%" }}>
+              <NavItem>
+                <Link
+                  className="nav-link btn"
+                  to="/loans"
+                  style={{ textDecoration: "none" }}
+                >
+                  Find a Loan
+                </Link>
+              </NavItem>
+              <NavItem>
+                <Button
+                  className="nav-link"
+                  color="danger"
+                  href="https://msusa.zipforhome.com/CompanySite/LoanOfficers"
+                >
+                  Apply Now
+                </Button>
+              </NavItem>
+            </Nav>
+            <Nav navbar>
+              <NavItem>
+                <NavLink href="#pablo" target="_blank">
+                  <i className="fab fa-twitter"></i>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="#pablo" target="_blank">
+                  <i className="fab fa-facebook-square"></i>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="#pablo" target="_blank">
+                  <i className="fab fa-instagram"></i>
+                </NavLink>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Container>
+      </Navbar>
       <div className="cd-section" id="headers">
         <div className="header-2">
-          <Navbar
-            className={"fixed-top" + navbarColor}
-            color="white"
-            expand="lg"
-          >
-            <Container>
-              <div className="navbar-translate">
-                <button
-                  aria-expanded={navbarOpen1}
-                  className="navbar-toggler"
-                  data-toggle="collapse"
-                  type="button"
-                  onClick={() => {
-                    document.documentElement.classList.toggle("nav-open");
-                    setNavbarOpen1(!navbarOpen1);
-                  }}
-                >
-                  <span className="navbar-toggler-bar bar1"></span>
-                  <span className="navbar-toggler-bar bar2"></span>
-                  <span className="navbar-toggler-bar bar3"></span>
-                </button>
-              </div>
-              <Collapse navbar isOpen={navbarOpen1}>
-                {/* <NavbarBrand to="/" id="navbar-brand">
-                  <img src={img} alt="logo" style={{ width: "125px" }} />
-                </NavbarBrand> */}
-                <Nav className="mx-auto" navbar style={{ paddingLeft: "14%" }}>
-                  <NavItem>
-                    <Button
-                      className="nav-link"
-                      color={findLoanButtonColor}
-                      onClick={toggleModal}
-                    >
-                      <p>Find a Loan</p>
-                    </Button>
-                  </NavItem>
-                </Nav>
-                <Nav className="nav navbar-right" navbar>
-                  <NavItem>
-                    <NavLink href="#pablo" target="_blank">
-                      <i className="fab fa-twitter"></i>
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink href="#pablo" target="_blank">
-                      <i className="fab fa-facebook-square"></i>
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink href="#pablo" target="_blank">
-                      <i className="fab fa-instagram"></i>
-                    </NavLink>
-                  </NavItem>
-                </Nav>
-              </Collapse>
-            </Container>
-          </Navbar>
           <div className="page-header header-filter">
             <div className="page-header-image">
               <div className=".page-header-video-wrapper">
@@ -285,7 +162,11 @@ const Home = () => {
                   poster="../assets/img/columbia-skyline.png"
                 >
                   <source src={bgVideo} type="video/mp4" />
-                  browser not supported
+                  <img
+                    src={bgImage}
+                    title="Your browser does not support the <video> tag"
+                    alt="Your browser does not support the <video> tag"
+                  />
                 </video>
               </div>
             </div>
@@ -444,14 +325,10 @@ const Home = () => {
                         setText({ ...text, showMore1: !text.showMore1 })
                       }
                     >
-                      {text.showMore1 ? "show less" : "..."}
+                      {text.showMore1 ? "show less" : "see more"}
                     </Button>
                   </p>
-                  <a
-                    className="btn btn-danger"
-                    href="https://dave.zipforhome.com/LoanApplication/Contact?IsStart=Y"
-                    color="danger"
-                  >
+                  <a className="btn btn-danger" href={dave.url} color="danger">
                     Apply with Dave
                   </a>
                   <CardFooter>
@@ -511,12 +388,12 @@ const Home = () => {
                         setText({ ...text, showMore2: !text.showMore2 })
                       }
                     >
-                      {text.showMore2 ? "show less" : "..."}
+                      {text.showMore2 ? "show less" : "see more"}
                     </Button>
                   </p>
                   <a
                     className="btn btn-danger"
-                    href="https://katelynn.zipforhome.com/LoanApplication/Contact?IsStart=Y"
+                    href={katelynn.url}
                     color="danger"
                   >
                     Apply with Katelynn
@@ -570,13 +447,13 @@ const Home = () => {
                         setText({ ...text, showMore3: !text.showMore3 })
                       }
                     >
-                      {text.showMore3 ? "show less" : "..."}
+                      {text.showMore3 ? "show less" : "see more"}
                     </Button>
                   </p>
 
                   <a
                     className="btn btn-danger"
-                    href="https://ashley.zipforhome.com/LoanApplication/Contact?IsStart=Y"
+                    href={ashley.url}
                     color="danger"
                   >
                     Apply with Ashley
@@ -655,105 +532,124 @@ const Home = () => {
             </Col>
             <Col className="ml-auto mr-auto" md="5">
               <Card className="card-contact card-raised">
-                <Form id="contact-form1" method="post" role="form">
-                  <CardHeader className="text-center">
-                    <CardTitle tag="h4">Contact Us</CardTitle>
-                  </CardHeader>
-                  <CardBody>
-                    <Row>
-                      <Col className="pr-2" md="6">
-                        <label>First name</label>
-                        <InputGroup
-                          className={first1Focus ? "input-group-focus" : ""}
-                        >
-                          <InputGroupAddon addonType="prepend">
-                            <InputGroupText>
-                              <i className="now-ui-icons users_circle-08"></i>
-                            </InputGroupText>
-                          </InputGroupAddon>
-                          <Input
-                            aria-label="First Name..."
-                            autoComplete="given-name"
-                            placeholder="First Name..."
-                            type="text"
-                            onFocus={() => setFirst1Focus(true)}
-                            onBlur={() => setFirst1Focus(false)}
-                          ></Input>
-                        </InputGroup>
-                      </Col>
-                      <Col className="pl-2" md="6">
-                        <FormGroup>
-                          <label>Last name</label>
+                {formState.succeeded ? (
+                  <>
+                    <div className="m-5 text-center text-success">
+                      <i className="fas fa-6x fa-paper-plane"></i>
+                    </div>
+                    <h5 className="text-center">Sent</h5>
+                    <p className="text-center">
+                      Your message has been sent. We will be in touch shortly.
+                    </p>
+                  </>
+                ) : (
+                  <Form
+                    onSubmit={handleSubmit}
+                    id="contact-form1"
+                    method="post"
+                    role="form"
+                  >
+                    <CardHeader className="text-center">
+                      <CardTitle tag="h4">Contact Us</CardTitle>
+                    </CardHeader>
+                    <CardBody>
+                      <Row>
+                        <Col className="pr-2">
+                          <label htmlFor="name">Name</label>
                           <InputGroup
-                            className={last1Focus ? "input-group-focus" : ""}
+                            className={first1Focus ? "input-group-focus" : ""}
                           >
                             <InputGroupAddon addonType="prepend">
                               <InputGroupText>
-                                <i className="now-ui-icons text_caps-small"></i>
+                                <i className="now-ui-icons users_circle-08"></i>
                               </InputGroupText>
                             </InputGroupAddon>
                             <Input
-                              aria-label="Last Name..."
-                              autoComplete="family-name"
-                              placeholder="Last Name..."
+                              aria-label="Full Name..."
+                              autoComplete="given-name"
+                              placeholder="Full Name..."
                               type="text"
-                              onFocus={() => setLast1Focus(true)}
-                              onBlur={() => setLast1Focus(false)}
+                              id="name"
+                              name="name"
+                              onFocus={() => setFirst1Focus(true)}
+                              onBlur={() => setFirst1Focus(false)}
                             ></Input>
+                            <ValidationError
+                              prefix="name"
+                              field="name"
+                              errors={formState.errors}
+                            />
                           </InputGroup>
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <FormGroup>
-                      <label>Email address</label>
-                      <InputGroup
-                        className={email1Focus ? "input-group-focus" : ""}
-                      >
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="now-ui-icons ui-1_email-85"></i>
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input
-                          autoComplete="email"
-                          placeholder="Email Here..."
-                          type="email"
-                          onFocus={() => setEmail1Focus(true)}
-                          onBlur={() => setEmail1Focus(false)}
-                        ></Input>
-                      </InputGroup>
-                    </FormGroup>
-                    <FormGroup>
-                      <label>Your message</label>
-                      <Input
-                        id="message"
-                        name="message"
-                        rows="6"
-                        type="textarea"
-                      ></Input>
-                    </FormGroup>
-                    <Row>
-                      <Col md="6">
-                        <FormGroup check>
-                          <Label check>
-                            <Input type="checkbox"></Input>
-                            <span className="form-check-sign"></span>
-                            I'm not a robot
-                          </Label>
-                        </FormGroup>
-                      </Col>
-                      <Col md="6">
-                        <Button
-                          className="btn-round pull-right"
-                          color="info"
-                          type="submit"
+                        </Col>
+                      </Row>
+                      <FormGroup>
+                        <label htmlFor="email">Email address</label>
+                        <InputGroup
+                          className={email1Focus ? "input-group-focus" : ""}
                         >
-                          Send Message
-                        </Button>
-                      </Col>
-                    </Row>
-                  </CardBody>
-                </Form>
+                          <InputGroupAddon addonType="prepend">
+                            <InputGroupText>
+                              <i className="now-ui-icons ui-1_email-85"></i>
+                            </InputGroupText>
+                          </InputGroupAddon>
+                          <Input
+                            autoComplete="email"
+                            placeholder="Email Here..."
+                            type="email"
+                            id="email"
+                            name="email"
+                            onFocus={() => setEmail1Focus(true)}
+                            onBlur={() => setEmail1Focus(false)}
+                          ></Input>
+                          <ValidationError
+                            prefix="Email"
+                            field="email"
+                            errors={formState.errors}
+                          />
+                        </InputGroup>
+                      </FormGroup>
+                      <FormGroup>
+                        <label htmlFor="message">Your message</label>
+                        <Input
+                          id="message"
+                          name="message"
+                          rows="6"
+                          type="textarea"
+                        ></Input>
+                        <ValidationError
+                          prefix="Message"
+                          field="message"
+                          errors={formState.errors}
+                        />
+                      </FormGroup>
+                      <Row>
+                        <Col md="6">
+                          <FormGroup check>
+                            <Label check>
+                              <Input
+                                type="checkbox"
+                                checked={checked}
+                                onChange={handleRobotCheck}
+                              ></Input>
+                              <span className="form-check-sign"></span>
+                              I'm not a robot
+                            </Label>
+                          </FormGroup>
+                        </Col>
+                        <Col md="6">
+                          <Button
+                            className="btn-round pull-right"
+                            color="info"
+                            type="submit"
+                            disabled={!checked || formState.isSubmitting}
+                          >
+                            Send Message
+                          </Button>
+                        </Col>
+                      </Row>
+                    </CardBody>
+                  </Form>
+                )}
               </Card>
             </Col>
           </Row>
