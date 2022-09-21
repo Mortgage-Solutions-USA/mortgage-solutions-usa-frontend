@@ -109,7 +109,7 @@ const Loanfinder = () => {
             <NavbarBrand>
               <Link to="/">
                 <img
-                  src={require("../assets/img/msa-header-logo.png")}
+                  src={require("../assets/img/logo-white.png")}
                   alt="logo"
                   style={{ width: "100px" }}
                 />

@@ -28,15 +28,17 @@ import { useForm, ValidationError } from "@formspree/react";
 import bgVideo from "assets/img/home-vid-bg.mp4";
 import bgImage from "assets/img/home-vid-bg.jpg";
 
-import teamInfo from "central-hub";
+import teamInfo from "../assets/data/team-info";
+import socialMedia from "../assets/data/social-media";
+import contact from "../assets/data/contact-us";
 
-import headerLogo from "../assets/img/msa-header-logo.png";
+import headerLogo from "../assets/img/logo-white.png";
 
 import "../assets/css/Home.css";
 
 const Home = () => {
   const [navbarOpen1, setNavbarOpen1] = useState(false);
-  const [formState, handleSubmit] = useForm("mgeqvpgq");
+  const [formState, handleSubmit] = useForm("mlevgajo");
   const [checked, setChecked] = useState(false);
   const [navbarColor, setNavbarColor] = useState(
     (document.documentElement.scrollTop > 499 || document.body.scrollTop) > 499
@@ -109,7 +111,7 @@ const Home = () => {
             </button>
           </div>
           <Collapse navbar isOpen={navbarOpen1}>
-            <Nav className="mx-auto" navbar style={{ paddingLeft: "14%" }}>
+            <Nav className="mx-auto" navbar style={{ paddingLeft: "9%" }}>
               <NavItem>
                 <Link
                   className="nav-link btn"
@@ -131,17 +133,12 @@ const Home = () => {
             </Nav>
             <Nav navbar>
               <NavItem>
-                <NavLink href="#pablo" target="_blank">
-                  <i className="fab fa-twitter"></i>
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#pablo" target="_blank">
+                <NavLink href={socialMedia.facebook} target="_blank">
                   <i className="fab fa-facebook-square"></i>
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#pablo" target="_blank">
+                <NavLink href={socialMedia.instagram} target="_blank">
                   <i className="fab fa-instagram"></i>
                 </NavLink>
               </NavItem>
@@ -201,7 +198,7 @@ const Home = () => {
                   <Col className="text-center">
                     <h2>
                       YOUR{" "}
-                      <span className="text-success">
+                      <span className="text-danger">
                         <strong>TRUSTED</strong>
                       </span>{" "}
                       MORTGAGE EXPERTS
@@ -288,7 +285,7 @@ const Home = () => {
             <Col className="ml-auto mr-auto text-center" md="8">
               <h2 className="title">
                 MEET YOUR TEAM OF <br />
-                <span className="text-success" style={{ fontSize: "250%" }}>
+                <span className="text-danger" style={{ fontSize: "250%" }}>
                   <strong>TRUSTED</strong>
                 </span>{" "}
                 <br />
@@ -498,22 +495,15 @@ const Home = () => {
         <Container>
           <Row className="border-bottom">
             <Col md="5">
-              <h2 className="title">Get in Touch</h2>
-              <h4 className="description">
-                Need to get in touch with us ? Either fill out the form with
-                your inquiry or find the contact information below.
-              </h4>
+              <h2 className="title">{contact.title}</h2>
+              <h4 className="description">{contact.description}</h4>
               <div className="info info-horizontal">
                 <div className="icon icon-info">
                   <i className="now-ui-icons location_pin"></i>
                 </div>
                 <div className="description">
-                  <h4 className="info-title">Find us at the office</h4>
-                  <p className="description">
-                    714 State Hwy 248 <br></br>
-                    Suite 531 Branson, <br></br>
-                    MO 65616
-                  </p>
+                  <h4 className="info-title">{contact.address.title}</h4>
+                  <p className="description">{contact.address.description}</p>
                 </div>
               </div>
               <div className="info info-horizontal">
@@ -521,11 +511,11 @@ const Home = () => {
                   <i className="now-ui-icons tech_mobile"></i>
                 </div>
                 <div className="description">
-                  <h4 className="info-title">Give us a ring</h4>
+                  <h4 className="info-title">{contact.phone.title}</h4>
                   <p className="description">
-                    Mortgage Solutions USA <br></br>
-                    417-544-0980 <br></br>
-                    Dave@mortgagesolutions-usa.com
+                    {contact.companyName} <br></br>
+                    {contact.phone.description} <br></br>
+                    {contact.phone.email}
                   </p>
                 </div>
               </div>
@@ -661,22 +651,13 @@ const Home = () => {
       <div className="social-line social-line-big-icons social-line-white">
         <Container>
           <Row>
-            <Col md="2">
-              <Button
-                className="btn-neutral btn-icon btn-footer"
-                color="twitter"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="fab fa-twitter"></i>
-              </Button>
-            </Col>
+            <Col md="4"></Col>
             <Col md="2">
               <Button
                 className="btn-neutral btn-icon btn-footer"
                 color="facebook"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
+                href={socialMedia.facebook}
+                target="_blank"
               >
                 <i className="fab fa-facebook-square"></i>
               </Button>
@@ -684,43 +665,14 @@ const Home = () => {
             <Col md="2">
               <Button
                 className="btn-neutral btn-icon btn-footer"
-                color="google"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="fab fa-google-plus"></i>
-              </Button>
-            </Col>
-            <Col md="2">
-              <Button
-                className="btn-neutral btn-icon btn-footer"
-                color="dribbble"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="fab fa-dribbble"></i>
-              </Button>
-            </Col>
-            <Col md="2">
-              <Button
-                className="btn-neutral btn-icon btn-footer"
-                color="youtube"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="fab fa-youtube"></i>
-              </Button>
-            </Col>
-            <Col md="2">
-              <Button
-                className="btn-neutral btn-icon btn-footer"
                 color="instagram"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
+                href={socialMedia.instagram}
+                target="_blank"
               >
                 <i className="fab fa-instagram"></i>
               </Button>
             </Col>
+            <Col md="4"></Col>
           </Row>
         </Container>
       </div>
@@ -732,6 +684,10 @@ const Home = () => {
           <div>
             © {new Date().getFullYear()}, Mortgage Solutions USA - All Rights
             Reserved.
+          </div>
+          <div>
+            Made With <i className="fas fa-heart text-danger"></i> by Invigorate
+            Code LLC
           </div>
         </Container>
       </footer>
