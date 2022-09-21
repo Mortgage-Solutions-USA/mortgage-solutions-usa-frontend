@@ -285,7 +285,10 @@ const Home = () => {
             <Col className="ml-auto mr-auto text-center" md="8">
               <h2 className="title">
                 MEET YOUR TEAM OF <br />
-                <span className="text-danger" style={{ fontSize: "250%" }}>
+                <span
+                  className="text-danger trusted"
+                  style={{ fontSize: "250%" }}
+                >
                   <strong>TRUSTED</strong>
                 </span>{" "}
                 <br />

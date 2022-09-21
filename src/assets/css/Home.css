@@ -79,7 +79,7 @@ video {
 }
 
 @media (max-width: 576px) {
-  .text-success {
-    font-size: 200% !important;
+  .trusted {
+    font-size: 220% !important;
   }
 }
