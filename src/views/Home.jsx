@@ -26,7 +26,6 @@ import {
 import { useForm, ValidationError } from "@formspree/react";
 
 import bgVideo from "assets/img/home-vid-bg.mp4";
-import bgImage from "assets/img/home-vid-bg.jpg";
 
 import teamInfo from "../assets/data/team-info";
 import socialMedia from "../assets/data/social-media";
@@ -50,6 +49,14 @@ const Home = () => {
     setChecked(!checked);
   };
 
+  const isSafari = () => {
+    const ua = navigator.userAgent.toLowerCase();
+    return ua.indexOf("safari") > -1 && ua.indexOf("chrome") < 0;
+  };
+  const videoParentRef = React.useRef();
+  const [shouldUseImage, setShouldUseImage] = useState(false);
+  useEffect(() => {}, []);
+
   const [text, setText] = useState({
     showMore1: false,
     showMore2: false,
@@ -62,6 +69,38 @@ const Home = () => {
   const { dave, ashley, katelynn } = teamInfo;
 
   useEffect(() => {
+    // check if user agent is safari and we have the ref to the container <div />
+    if (isSafari() && videoParentRef.current) {
+      // obtain reference to the video element
+      const player = videoParentRef.current.children[0];
+
+      // if the reference to video player has been obtained
+      if (player) {
+        // set the video attributes using javascript as per the
+        // webkit Policy
+        player.controls = false;
+        player.playsinline = true;
+        player.muted = true;
+        player.setAttribute("muted", ""); // leave no stones unturned :)
+        player.autoplay = true;
+
+        // Let's wait for an event loop tick and be async.
+        setTimeout(() => {
+          // player.play() might return a promise but it's not guaranteed crossbrowser.
+          const promise = player.play();
+          // let's play safe to ensure that if we do have a promise
+          if (promise.then) {
+            promise
+              .then(() => {})
+              .catch(() => {
+                // if promise fails, hide the video and fallback to <img> tag
+                videoParentRef.current.style.display = "none";
+                setShouldUseImage(true);
+              });
+          }
+        }, 0);
+      }
+    }
     const updateNavbarColor = () => {
       if (
         document.documentElement.scrollTop > 499 ||
@@ -79,7 +118,7 @@ const Home = () => {
     return function cleanup() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
-  });
+  }, []);
 
   return (
     <>
@@ -151,20 +190,18 @@ const Home = () => {
           <div className="page-header header-filter">
             <div className="page-header-image">
               <div className=".page-header-video-wrapper">
-                <video
-                  playsInline
-                  autoPlay
-                  loop
-                  muted
-                  poster="../assets/img/columbia-skyline.png"
-                >
-                  <source src={bgVideo} type="video/mp4" />
-                  <img
-                    src={bgImage}
-                    title="Your browser does not support the <video> tag"
-                    alt="Your browser does not support the <video> tag"
+                {shouldUseImage ? (
+                  <img alt="..." className="page-header-image" src={bgVideo} />
+                ) : (
+                  <div
+                    ref={videoParentRef}
+                    dangerouslySetInnerHTML={{
+                      __html: `<video autoplay loop muted playsinline class="page-header-video">
+                      <source src=${bgVideo} type="video/mp4" />
+                    </video>`,
+                    }}
                   />
-                </video>
+                )}
               </div>
             </div>
             {/* <div style={{ height: "100vh" }}> */}

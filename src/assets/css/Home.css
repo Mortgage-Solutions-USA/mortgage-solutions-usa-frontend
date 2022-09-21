@@ -83,3 +83,7 @@ video {
     font-size: 200% !important;
   }
 }
+*::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
