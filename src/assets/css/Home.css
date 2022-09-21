@@ -80,6 +80,6 @@ video {
 
 @media (max-width: 576px) {
   .trusted {
-    font-size: 220% !important;
+    font-size: 200% !important;
   }
 }
