@@ -503,7 +503,11 @@ const Home = () => {
                 </div>
                 <div className="description">
                   <h4 className="info-title">{contact.address.title}</h4>
-                  <p className="description">{contact.address.description}</p>
+                  <p className="description">
+                    {contact.address.street1},<br />
+                    {contact.address.street2},<br />
+                    {contact.address.cityStateZip}
+                  </p>
                 </div>
               </div>
               <div className="info info-horizontal">

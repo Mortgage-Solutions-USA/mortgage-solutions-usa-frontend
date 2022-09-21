@@ -4,7 +4,9 @@ const contact = {
     description: 'Need to get in touch with us ? Either fill out the form with your inquiry or find the contact information below.',
     address: {
         title: 'Find us at the office',
-        description: '714 State Hwy 248,\n Suite 531 Branson,\n MO 65616',
+        street1: '714 State Hwy 248',
+        street2: 'Suite 531 Branson',
+        cityStateZip: 'MO 65616'
     },
     phone: {
         title: 'Give us a ring',
