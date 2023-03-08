@@ -9,33 +9,13 @@ import {
   Container,
   Row,
   Col,
-  CardBody,
-  Card,
   NavbarBrand,
-  Modal,
-  ModalHeader,
-  ModalBody,
 } from "reactstrap";
 
 import "../assets/css/Home.css";
 
 const Loanfinder = () => {
-  const [conModal, setConModal] = useState({
-    modal: false,
-    backdrop: true,
-  });
-  const [fhaModal, setFhaModal] = useState({
-    modal: false,
-    backdrop: true,
-  });
-  const [vaModal, setVaModal] = useState({
-    modal: false,
-    backdrop: true,
-  });
-  const [usdaModal, setUsdaModal] = useState({
-    modal: false,
-    backdrop: true,
-  });
+  const [activeTab, setActiveTab] = useState(1);
 
   const [navbarOpen1, setNavbarOpen1] = useState(false);
   const [navbarColor, setNavbarColor] = useState(
@@ -47,13 +27,13 @@ const Loanfinder = () => {
   useEffect(() => {
     const updateNavbarColor = () => {
       if (
-        document.documentElement.scrollTop > 499 ||
-        document.body.scrollTop > 499
+        document.documentElement.scrollTop > 49 ||
+        document.body.scrollTop > 49
       ) {
         setNavbarColor("");
       } else if (
-        document.documentElement.scrollTop < 500 ||
-        document.body.scrollTop < 500
+        document.documentElement.scrollTop < 50 ||
+        document.body.scrollTop < 50
       ) {
         setNavbarColor(" navbar-transparent");
       }
@@ -64,24 +44,8 @@ const Loanfinder = () => {
     };
   });
 
-  const toggleConModal = () => {
-    setConModal({ ...conModal, modal: !conModal.modal });
-  };
-
-  const toggleFhaModal = () => {
-    setFhaModal({ ...fhaModal, modal: !fhaModal.modal });
-  };
-
-  const toggleVaModal = () => {
-    setVaModal({ ...vaModal, modal: !vaModal.modal });
-  };
-
-  const toggleUsdaModal = () => {
-    setUsdaModal({ ...usdaModal, modal: !usdaModal.modal });
-  };
-
   return (
-    <div style={{ height: "100%", backgroundColor: "#b9b9b9" }}>
+    <div>
       {navbarOpen1 ? (
         <div
           id="bodyClick"
@@ -101,7 +65,7 @@ const Loanfinder = () => {
               type="button"
             >
               <Link to="/">
-                <i className="fas fa-chevron-left text-light"></i>
+                <i className="fas fa-chevron-left text-dark"></i>
               </Link>
             </button>
           </div>
@@ -109,7 +73,7 @@ const Loanfinder = () => {
             <NavbarBrand>
               <Link to="/">
                 <img
-                  src={require("../assets/img/logo-white.png")}
+                  src={require("../assets/img/MSU_Logo_Long_Black.png")}
                   alt="logo"
                   style={{ width: "100px" }}
                 />
@@ -146,162 +110,275 @@ const Loanfinder = () => {
           </Collapse>
         </Container>
       </Navbar>
-
       <div className="projects-1">
         <Container fluid>
-          <Row>
-            <Col className="mx-auto text-center" md="8">
-              <h2
-                className="title text-light"
-                style={{ textShadow: "2px 2px 4px #484747", fontSize: "50px" }}
-              >
-                Loan Programs
-              </h2>
-            </Col>
+          <Row
+            className="loan-finder-pre-header"
+            style={{
+              backgroundImage:
+                "url(" + require("assets/img/loan-finder-header.jpg") + ")",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              height: "50vh",
+              maxHeight: "50vh",
+              marginTop: "3%",
+            }}
+          >
+            <div className="d-flex align-items-center loan-finder-header">
+              <Col className="container mx-auto text-center " md="8">
+                <h2
+                  className="title text-light"
+                  style={{
+                    textShadow: "2px 2px 4px #484747",
+                    fontSize: "50px",
+                  }}
+                >
+                  Loan Programs
+                </h2>
+              </Col>
+            </div>
           </Row>
-          <Row>
-            <Col className="px-0" md="6">
-              <Card
-                className="card-background card-background-product card-no-shadow"
-                style={{
-                  backgroundImage:
-                    "url(" + require("assets/img/project1.jpg") + ")",
-                  height: "100%",
-                  cursor: "pointer",
-                }}
-                onClick={toggleConModal}
-              >
-                <CardBody>
-                  <h1 className="category">Conventional Loan</h1>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col className="px-0" md="6">
-              <Card
-                className="card-raised card-background card-background-product card-no-shadow"
-                style={{
-                  backgroundImage:
-                    "url(" + require("assets/img/project18.jpg") + ")",
-                  cursor: "pointer",
-                }}
-                onClick={toggleFhaModal}
-              >
-                <CardBody>
-                  <h1 className="category">FHA LOAN</h1>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col className="px-0" md="6">
-              <Card
-                className="card-background card-background-product card-no-shadow"
-                style={{
-                  backgroundImage:
-                    "url(" + require("assets/img/project20.jpg") + ")",
-                  cursor: "pointer",
-                }}
-                onClick={toggleUsdaModal}
-              >
-                <CardBody>
-                  <h1 className="category">USDA LOAN</h1>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col className="px-0" md="6">
-              <Card
-                className="card-background card-background-product card-no-shadow"
-                style={{
-                  backgroundImage:
-                    "url(" + require("assets/img/project19.jpg") + ")",
-                  cursor: "pointer",
-                }}
-                onClick={toggleVaModal}
-              >
-                <CardBody>
-                  <h1 className="category">VA LOAN</h1>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
+          <div className="row">
+            {/* setup tabs */}
+            <div className="col-md-12 px-0">
+              <div className="card">
+                <div className="card-header">
+                  <ul className="nav nav-tabs nav-tabs-neutral justify-content-center py-0">
+                    <li>
+                      <a
+                        className={`${
+                          activeTab === 1 ? "tabs-active" : ""
+                        } nav-link tabs-loans px-5 py-3`}
+                        data-toggle="tab"
+                        href="#link1"
+                        style={{ fontSize: "20px" }}
+                        onClick={() => setActiveTab(1)}
+                      >
+                        Conventional Loans
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className={`${
+                          activeTab === 2 ? "tabs-active" : ""
+                        } nav-link tabs-loans px-5 py-3`}
+                        data-toggle="tab"
+                        href="#link2"
+                        style={{ fontSize: "20px" }}
+                        onClick={() => setActiveTab(2)}
+                      >
+                        FHA Loans
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className={`${
+                          activeTab === 4 ? "tabs-active" : ""
+                        } nav-link tabs-loans px-5 py-3`}
+                        data-toggle="tab"
+                        href="#link3"
+                        style={{ fontSize: "20px" }}
+                        onClick={() => setActiveTab(4)}
+                      >
+                        VA Loans
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className={`${
+                          activeTab === 3 ? "tabs-active" : ""
+                        } nav-link tabs-loans px-5 py-3`}
+                        data-toggle="tab"
+                        href="#link4"
+                        style={{ fontSize: "20px" }}
+                        onClick={() => setActiveTab(3)}
+                      >
+                        USDA Loans
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          {activeTab === 1 ? (
+            <div className="row py-5">
+              <div className="col-md-12 py-5 my-5">
+                <div className="row d-flex justify-content-between">
+                  <div className="col-md-1"></div>
+                  <div className="col-md-3 py-5">
+                    <h1 style={{ color: "#5083c6" }}>Conventional Loan</h1>
+                    <p>
+                      Conventional loans are an excellent match for a buyer with
+                      a decent credit score and some savings for a down payment.
+                    </p>
+                    <h5>Conventional loans offer home buyers many benefits:</h5>
+                    <ul className="loans-list">
+                      <li>Down Payment Options</li>
+                      <li>Option to Cancel Mortage Insurance</li>
+                      <li>Option to Finance Multiple Property Types</li>
+                    </ul>
+                  </div>
+                  <div className="col-md-5 text-center">
+                    <img
+                      className="pt-5"
+                      src={require("../assets/img/conventional-loan.jpg")}
+                      alt="conventional"
+                      style={{ width: "80%" }}
+                    />
+                  </div>
+                  <div className="col-md-1"></div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+          {activeTab === 2 ? (
+            <div className="row py-5">
+              <div className="col-md-12 py-5 my-5">
+                <div className="row d-flex justify-content-between">
+                  <div className="col-md-1"></div>
+                  <div className="col-md-3 py-5">
+                    <h1 style={{ color: "#5083c6" }}>FHA LOAN</h1>
+                    <p>
+                      FHA loans are a flexible financing option for first-time
+                      and repeat home buyers.
+                    </p>
+                    <h5>FHA loans offer home buyers many benefits:</h5>
+                    <ul className="loans-list">
+                      <li>FHA loans accept down payments as low as 3.5%.</li>
+                      <li>
+                        flexibility in the source of the mortgage down payment,
+                        allowing greater mortgage and payment flexibility.
+                      </li>
+                      <li>
+                        FHA allows higher qualifying debt to income ratios,
+                        co-signers that do not have to live in the home, seller
+                        assistance towards buyer closing costs, and more.
+                      </li>
+                      <li>
+                        You can work with your loan officer to determine the
+                        source of your mortgage and how it will impact your FHA
+                        loan rate.
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="col-md-5 text-center">
+                    <img
+                      className="pt-5"
+                      src={require("../assets/img/fha-loan.jpg")}
+                      alt="conventional"
+                      style={{ width: "80%" }}
+                    />
+                  </div>
+                  <div className="col-md-1"></div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+          {activeTab === 3 ? (
+            <div className="row py-5">
+              <div className="col-md-12 py-5 my-5">
+                <div className="row d-flex justify-content-between">
+                  <div className="col-md-1"></div>
+                  <div className="col-md-3 py-5">
+                    <h1 style={{ color: "#5083c6" }}>USDA LOAN</h1>
+                    <p>
+                      Most U.S. properties are eligible, and middle-income
+                      families often meet income requirements. To qualify for a
+                      USDA rural development loan, you must be a US citizen that
+                      plans to purchase a primary residence in a USDA-eligible
+                      area. Your household income must be less than 115% of the
+                      median income in your area. You’ll also need a steady
+                      employment history, a healthy debt-to-income ratio, and a
+                      minimum credit score of 640.
+                    </p>
+                    <h5>USDA loans offer home buyers many benefits:</h5>
+                    <ul className="loans-list">
+                      <li>No down payment</li>
+                      <li>Low mortgage insurance premiums</li>
+                      <li>Competitive interest rates</li>
+                      <li>
+                        The option for the seller to pay up to 6% in closing
+                        costs and pre-paids for the buyer
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="col-md-5 text-center">
+                    <img
+                      className="pt-5"
+                      src={require("../assets/img/usda-loan.jpg")}
+                      alt="conventional"
+                      style={{ width: "80%" }}
+                    />
+                  </div>
+                  <div className="col-md-1"></div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+          {activeTab === 4 ? (
+            <div className="row py-5">
+              <div className="col-md-12 py-5 my-5">
+                <div className="row d-flex justify-content-between">
+                  <div className="col-md-1"></div>
+                  <div className="col-md-3 py-5">
+                    <h1 style={{ color: "#5083c6" }}>VA LOAN</h1>
+                    <p>
+                      We want to help our military community finance their dream
+                      homes! .Active military members, veterans, and surviving,
+                      un-remarried spouses of military members may be eligible
+                      for this type of loan.
+                    </p>
+                    <h5>VA loans have a variety of benefits available:</h5>
+                    <ul className="loans-list">
+                      <li>No down payment</li>
+                      <li>Competitive interest rates</li>
+                      <li>Seller-paid closing costs</li>
+                      <li>NO PMI</li>
+                    </ul>
+                    <h5>
+                      Your loan officer can explain the VA Funding fee given
+                      your loan amount and mortgage down payment.
+                    </h5>
+                  </div>
+                  <div className="col-md-5 text-center">
+                    <img
+                      className="pt-5"
+                      src={require("../assets/img/va-loan.jpg")}
+                      alt="conventional"
+                      style={{ width: "80%" }}
+                    />
+                  </div>
+                  <div className="col-md-1"></div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
         </Container>
       </div>
-      {/* Modals Start */}
 
-      <Modal
-        isOpen={conModal.modal}
-        toggle={toggleConModal}
-        backdrop={conModal.backdrop}
-        className="modal-dialog-centered"
-      >
-        <ModalHeader toggle={toggleConModal}>Conventional Loan</ModalHeader>
-        <ModalBody>
-          Conventional loans are an excellent match for a buyer with a decent
-          credit score and some savings for a down payment. Conventional loans
-          offer home buyers many benefits, including down payment options, the
-          option to cancel mortgage insurance, and the option to finance
-          multiple property types (e.g., investment, vacation, or primary
-          residences)
-        </ModalBody>
-      </Modal>
+      {/* Footer Section */}
 
-      <Modal
-        isOpen={fhaModal.modal}
-        toggle={toggleFhaModal}
-        backdrop={fhaModal.backdrop}
-        className="modal-dialog-centered"
-      >
-        <ModalHeader toggle={toggleFhaModal}>FHA LOAN</ModalHeader>
-        <ModalBody>
-          FHA loans are a flexible financing option for first-time and repeat
-          home buyers. FHA loans accept down payments as low as 3.5%. There’s
-          also flexibility in the source of the mortgage down payment, allowing
-          greater mortgage and payment flexibility. FHA allows higher qualifying
-          debt to income ratios, co-signers that do not have to live in the
-          home, seller assistance towards buyer closing costs, and more. You can
-          work with your loan officer to determine the source of your mortgage
-          and how it will impact your FHA loan rate.
-        </ModalBody>
-      </Modal>
-
-      <Modal
-        isOpen={usdaModal.modal}
-        toggle={toggleUsdaModal}
-        backdrop={usdaModal.backdrop}
-        className="modal-dialog-centered"
-      >
-        <ModalHeader toggle={toggleUsdaModal}>USDA LOAN</ModalHeader>
-        <ModalBody>
-          The USDA loan program offers several benefits, including no down
-          payment, low mortgage insurance premiums, competitive interest rates,
-          and the option for the seller to pay up to 6% in closing costs and
-          pre-paids for the buyer. Additionally, most U.S. properties are
-          eligible, and middle-income families often meet income requirements.
-          To qualify for a USDA rural development loan, you must be a US citizen
-          that plans to purchase a primary residence in a USDA-eligible area.
-          Your household income must be less than 115% of the median income in
-          your area. You’ll also need a steady employment history, a healthy
-          debt-to-income ratio, and a minimum credit score of 640.
-        </ModalBody>
-      </Modal>
-
-      <Modal
-        isOpen={vaModal.modal}
-        toggle={toggleVaModal}
-        backdrop={vaModal.backdrop}
-        className="modal-dialog-centered"
-      >
-        <ModalHeader toggle={toggleVaModal}>VA LOAN</ModalHeader>
-        <ModalBody>
-          We want to help our military community finance their dream homes!
-          .Active military members, veterans, and surviving, un-remarried
-          spouses of military members may be eligible for this type of loan.VA
-          loans have a variety of benefits available. When you get a VA loan,
-          there is no down payment, competitive interest rates, seller-paid
-          closing costs, and NO PMI. Your loan officer can explain the VA
-          Funding fee given your loan amount and mortgage down payment.
-        </ModalBody>
-      </Modal>
-
-      {/* Modals End */}
+      <footer className="footer bg-dark text-light">
+        <Container>
+          <div>
+            © {new Date().getFullYear()}, Mortgage Solutions USA - All Rights
+            Reserved.
+          </div>
+          <div>
+            Made With <i className="fas fa-heart text-danger"></i> by Invigorate
+            Code LLC
+          </div>
+        </Container>
+      </footer>
     </div>
   );
 };
