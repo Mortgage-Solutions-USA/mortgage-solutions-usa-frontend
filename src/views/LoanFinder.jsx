@@ -12,6 +12,8 @@ import {
   NavbarBrand,
 } from "reactstrap";
 
+import socialMedia from "../assets/data/social-media";
+
 import "../assets/css/Home.css";
 
 const Loanfinder = () => {
@@ -92,17 +94,12 @@ const Loanfinder = () => {
             </Nav> */}
             <Nav navbar className="ml-auto">
               <NavItem>
-                <NavLink href="#pablo" target="_blank">
-                  <i className="fab fa-twitter text-dark"></i>
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#pablo" target="_blank">
+                <NavLink href={socialMedia.facebook} target="_blank">
                   <i className="fab fa-facebook-square text-dark"></i>
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#pablo" target="_blank">
+                <NavLink href={socialMedia.instagram} target="_blank">
                   <i className="fab fa-instagram text-dark"></i>
                 </NavLink>
               </NavItem>
