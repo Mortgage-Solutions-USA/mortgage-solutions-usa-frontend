@@ -43,7 +43,7 @@ const teamInfo = [
     id: 5,
     name: "Jessica Henderson",
     title: "Mortgage Loan Originator",
-    license: "NMLS # 1635220",
+    license: "NMLS # 1635220 5",
     img: "../assets/img/jessica-headshot.png",
     url: "https://jessy.zipforhome.com/",
     desc: "Hello! My name is Jessy Henderson! I have been in the banking/consumer loan industry for 9 years. In 2020 I became the Asst Vice president of the Financial Institution I was working at and quickly realized that I love helping people be able to buy their dream home! I have assisted loan officers with processing loans and I am now a licensed mortgage loan originator! I was raised in a small German town 20 minutes east of Jefferson City named Frankenstein, Missouri (yes, that is the real name)!  I have lived in the Jefferson City area since graduating high school and can’t imagine living anywhere but here!  I have 3 kids, ages 22,21 and 14.  A French bulldog named Sebastian and a cat I found on the highway named Ariel.  I enjoy being outdoors as much as I can and you can often find me kayaking, learning to use a stand-up board, sitting poolside and making memories with my children!Buying a home is one of the biggest and most important purchases you will ever do, I’m here to make that experience as easy, fun and stressless as I can.  I am excited to be able to help you and your family find your first home and your dream home!",
