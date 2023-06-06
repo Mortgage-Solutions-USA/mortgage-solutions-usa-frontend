@@ -26,15 +26,28 @@ import {
 import { useForm, ValidationError } from "@formspree/react";
 
 import bgVideo from "assets/img/home-vid-bg.mp4";
-import bgImage from "assets/img/home-vid-bg.jpg";
 
 import teamInfo from "../assets/data/team-info";
 import socialMedia from "../assets/data/social-media";
 import contact from "../assets/data/contact-us";
 
+import daveImg from "../assets/img/dave-headshot.png";
+import chadImg from "../assets/img/chad-headshot.png";
+import katelynnImg from "../assets/img/katelynn-headshot.png";
+import ashleyImg from "../assets/img/ashley-headshot.png";
+import jessicaImg from "../assets/img/jessica-headshot.jpg";
+
 import headerLogo from "../assets/img/logo-white.png";
 
 import "../assets/css/Home.css";
+
+const imgs = {
+  Dave: daveImg,
+  Chad: chadImg,
+  Katelynn: katelynnImg,
+  Ashley: ashleyImg,
+  Jessica: jessicaImg,
+};
 
 const Home = () => {
   const [navbarOpen1, setNavbarOpen1] = useState(false);
@@ -50,18 +63,67 @@ const Home = () => {
     setChecked(!checked);
   };
 
-  const [text, setText] = useState({
-    showMore1: false,
-    showMore2: false,
-    showMore3: false,
-  });
+  const showMoreText = (id) => {
+    setTeamCardsInfo(
+      teamCardsInfo.map((info) => {
+        if (info.id === id) {
+          return { ...info, showMore: !info.showMore };
+        }
+        return info;
+      })
+    );
+  };
+
+  const isSafari = () => {
+    const ua = navigator.userAgent.toLowerCase();
+    return ua.indexOf("safari") > -1 && ua.indexOf("chrome") < 0;
+  };
+  const videoParentRef = React.useRef();
+  const [shouldUseImage, setShouldUseImage] = useState(false);
+  useEffect(() => {}, []);
+
+  const [teamCardsInfo, setTeamCardsInfo] = useState(
+    teamInfo.map((info) => {
+      return { ...info, showMore: false };
+    })
+  );
 
   const [first1Focus, setFirst1Focus] = useState(false);
   const [email1Focus, setEmail1Focus] = useState(false);
 
-  const { dave, ashley, katelynn } = teamInfo;
-
   useEffect(() => {
+    // check if user agent is safari and we have the ref to the container <div />
+    if (isSafari() && videoParentRef.current) {
+      // obtain reference to the video element
+      const player = videoParentRef.current.children[0];
+
+      // if the reference to video player has been obtained
+      if (player) {
+        // set the video attributes using javascript as per the
+        // webkit Policy
+        player.controls = false;
+        player.playsinline = true;
+        player.muted = true;
+        player.setAttribute("muted", ""); // leave no stones unturned :)
+        player.autoplay = true;
+
+        // Let's wait for an event loop tick and be async.
+        setTimeout(() => {
+          // player.play() might return a promise but it's not guaranteed crossbrowser.
+          const promise = player.play();
+          // let's play safe to ensure that if we do have a promise
+          if (promise.then) {
+            promise
+              .then(() => {})
+              .catch(() => {
+                // if promise fails, hide the video and fallback to <img> tag
+                videoParentRef.current.style.display = "none";
+                setShouldUseImage(true);
+              });
+          }
+        }, 0);
+      }
+    }
     const updateNavbarColor = () => {
       if (
         document.documentElement.scrollTop > 499 ||
@@ -79,7 +141,7 @@ const Home = () => {
     return function cleanup() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
-  });
+  }, []);
 
   return (
     <>
@@ -95,20 +157,20 @@ const Home = () => {
       <Navbar className={"fixed-top" + navbarColor} color="white" expand="lg">
         <Container>
           <div className="navbar-translate">
-            <button
-              aria-expanded={navbarOpen1}
-              className="navbar-toggler"
-              data-toggle="collapse"
-              type="button"
-              onClick={() => {
-                document.documentElement.classList.toggle("nav-open");
-                setNavbarOpen1(!navbarOpen1);
-              }}
+            <Link
+              className="btn home-mobile-btn"
+              to="/loans"
+              style={{ textDecoration: "none" }}
             >
-              <span className="navbar-toggler-bar bar1"></span>
-              <span className="navbar-toggler-bar bar2"></span>
-              <span className="navbar-toggler-bar bar3"></span>
-            </button>
+              Find a Loan
+            </Link>
+            <Button
+              className="btn home-mobile-btn"
+              color="danger"
+              href="https://msusa.zipforhome.com/CompanySite/LoanOfficers"
+            >
+              Apply Now
+            </Button>
           </div>
           <Collapse navbar isOpen={navbarOpen1}>
             <Nav className="mx-auto" navbar style={{ paddingLeft: "9%" }}>
@@ -151,20 +213,18 @@ const Home = () => {
           <div className="page-header header-filter">
             <div className="page-header-image">
               <div className=".page-header-video-wrapper">
-                <video
-                  playsInline
-                  autoPlay
-                  loop
-                  muted
-                  poster="../assets/img/columbia-skyline.png"
-                >
-                  <source src={bgVideo} type="video/mp4" />
-                  <img
-                    src={bgImage}
-                    title="Your browser does not support the <video> tag"
-                    alt="Your browser does not support the <video> tag"
+                {shouldUseImage ? (
+                  <img alt="..." className="page-header-image" src={bgVideo} />
+                ) : (
+                  <div
+                    ref={videoParentRef}
+                    dangerouslySetInnerHTML={{
+                      __html: `<video autoplay loop muted playsinline class="page-header-video">
+                      <source src=${bgVideo} type="video/mp4" />
+                    </video>`,
+                    }}
                   />
-                </video>
+                )}
               </div>
             </div>
             {/* <div style={{ height: "100vh" }}> */}
@@ -277,7 +337,8 @@ const Home = () => {
       <div
         className="team-5 section-image"
         style={{
-          backgroundImage: "url(" + require("assets/img/bg9.jpg") + ")",
+          backgroundImage:
+            "url(" + require("assets/img/homes-teams-bg.jpg") + ")",
         }}
       >
         <Container>
@@ -297,197 +358,79 @@ const Home = () => {
             </Col>
           </Row>
           <Row>
-            <Col md="4">
-              <Card className="card-profile">
-                <div className="card-avatar">
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    <img
-                      alt="..."
-                      className="img img-raised"
-                      src={require("assets/img/dave-headshot.png")}
-                    ></img>
-                  </a>
-                </div>
-                <CardBody>
-                  <CardTitle tag="h3">{dave.name}</CardTitle>
-                  <h6 className="category text-info">
-                    {dave.title} <br />{" "}
-                    <span className="text-dark">{dave.license}</span>
-                  </h6>
-                  <p className="card-description">
-                    {text.showMore1
-                      ? dave.desc
-                      : `${dave.desc.substring(0, 250)}`}{" "}
-                    <Button
-                      color="info"
-                      className="btn-link pl-0"
-                      onClick={() =>
-                        setText({ ...text, showMore1: !text.showMore1 })
-                      }
+            {teamCardsInfo.map((team) => (
+              <Col key={team.id} className="mx-2">
+                <Card className="card-profile">
+                  <div className="card-avatar">
+                    <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                      <img
+                        alt="..."
+                        className="img img-raised"
+                        src={imgs[`${team.firstName}`]}
+                      ></img>
+                    </a>
+                  </div>
+                  <CardBody>
+                    <CardTitle tag="h3">{team.name}</CardTitle>
+                    <h6
+                      className="category text-info"
+                      style={{ minHeight: "47px" }}
                     >
-                      {text.showMore1 ? "show less" : "see more"}
-                    </Button>
-                  </p>
-                  <a className="btn btn-danger" href={dave.url} color="danger">
-                    Apply with Dave
-                  </a>
-                  <CardFooter>
-                    <Button
-                      className="btn-icon btn-neutral btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
+                      {team.title} <br />{" "}
+                      <span className="text-dark">{team.license}</span>
+                    </h6>
+                    <p
+                      className="card-description"
+                      style={{ minHeight: "355px" }}
                     >
-                      <i className="fab fa-linkedin"></i>
-                    </Button>
-                    <Button
-                      className="btn-icon btn-neutral btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fab fa-twitter"></i>
-                    </Button>
-                    <Button
-                      className="btn-icon btn-neutral btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fab fa-dribbble"></i>
-                    </Button>
-                  </CardFooter>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md="4">
-              <Card className="card-profile">
-                <div className="card-avatar">
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    <img
-                      alt="..."
-                      className="img img-raised"
-                      src={require("assets/img/katelynn-headshot.png")}
-                    ></img>
-                  </a>
-                </div>
-                <CardBody>
-                  <CardTitle tag="h4">{katelynn.name}</CardTitle>
-                  <h6 className="category text-info">
-                    {katelynn.title}
-                    <br /> <span className="text-dark">{katelynn.license}</span>
-                  </h6>
-                  <p className="card-description">
-                    {text.showMore2
-                      ? katelynn.desc
-                      : `${katelynn.desc.substring(0, 250)}`}{" "}
-                    <Button
-                      color="info"
-                      className="btn-link pl-0"
-                      onClick={() =>
-                        setText({ ...text, showMore2: !text.showMore2 })
-                      }
-                    >
-                      {text.showMore2 ? "show less" : "see more"}
-                    </Button>
-                  </p>
-                  <a
-                    className="btn btn-danger"
-                    href={katelynn.url}
-                    color="danger"
-                  >
-                    Apply with Katelynn
-                  </a>
-                  <CardFooter>
-                    <Button
-                      className="btn-icon btn-neutral btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fab fa-dribbble"></i>
-                    </Button>
-                    <Button
-                      className="btn-icon btn-neutral btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fab fa-twitter"></i>
-                    </Button>
-                  </CardFooter>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md="4">
-              <Card className="card-profile">
-                <div className="card-avatar">
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    <img
-                      alt="ashley-headshot"
-                      className="img img-raised"
-                      src={require("assets/img/ashley-headshot.png")}
-                    ></img>
-                  </a>
-                </div>
-                <CardBody>
-                  <CardTitle tag="h4">{ashley.name}</CardTitle>
-                  <h6 className="category text-info">
-                    {ashley.title} <br />{" "}
-                    <span className="text-dark">{ashley.license}</span>
-                  </h6>
-                  <p className="card-description">
-                    {text.showMore3
-                      ? ashley.desc
-                      : `${ashley.desc.substring(0, 250)}`}{" "}
-                    <Button
-                      color="info"
-                      className="btn-link pl-0"
-                      onClick={() =>
-                        setText({ ...text, showMore3: !text.showMore3 })
-                      }
-                    >
-                      {text.showMore3 ? "show less" : "see more"}
-                    </Button>
-                  </p>
-
-                  <a
-                    className="btn btn-danger"
-                    href={ashley.url}
-                    color="danger"
-                  >
-                    Apply with Ashley
-                  </a>
-
-                  <CardFooter>
-                    <Button
-                      className="btn-icon btn-neutral btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fab fa-dribbble"></i>
-                    </Button>
-                    <Button
-                      className="btn-icon btn-neutral btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fab fa-twitter"></i>
-                    </Button>
-                    <Button
-                      className="btn-icon btn-neutral btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fab fa-pinterest"></i>
-                    </Button>
-                  </CardFooter>
-                </CardBody>
-              </Card>
-            </Col>
+                      {team.showMore
+                        ? team.desc
+                        : `${team.desc.substring(0, 250)}`}{" "}
+                      <Button
+                        color="info"
+                        className="btn-link pl-0"
+                        onClick={() => showMoreText(team.id)}
+                      >
+                        {team.showMore ? "show less" : "see more"}
+                      </Button>
+                    </p>
+                    <CardFooter>
+                      <a
+                        className="btn btn-danger"
+                        href={team.url}
+                        color="danger"
+                      >
+                        Apply with {team.firstName}
+                      </a>
+                      {/* <Button
+                        className="btn-icon btn-neutral btn-round"
+                        color="info"
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        <i className="fab fa-linkedin"></i>
+                      </Button>
+                      <Button
+                        className="btn-icon btn-neutral btn-round"
+                        color="info"
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        <i className="fab fa-twitter"></i>
+                      </Button>
+                      <Button
+                        className="btn-icon btn-neutral btn-round"
+                        color="info"
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        <i className="fab fa-dribbble"></i>
+                      </Button> */}
+                    </CardFooter>
+                  </CardBody>
+                </Card>
+              </Col>
+            ))}
           </Row>
         </Container>
       </div>

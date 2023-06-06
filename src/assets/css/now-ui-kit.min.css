@@ -627,7 +627,9 @@ select.selectpicker {
 .bootstrap-select.fit-width {
   width: auto !important;
 }
-.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(
+    .input-group-btn
+  ) {
   width: 220px;
 }
 .bootstrap-select.form-control {
@@ -641,7 +643,9 @@ select.selectpicker {
 .bootstrap-select.form-control.input-group-btn {
   z-index: auto;
 }
-.bootstrap-select.form-control.input-group-btn:not(:first-child):not(:last-child)
+.bootstrap-select.form-control.input-group-btn:not(:first-child):not(
+    :last-child
+  )
   > .btn {
   border-radius: 0;
 }
@@ -6376,9 +6380,13 @@ img {
   color: #444;
 }
 .card
-  a:not(.btn):not(.nav-link):not([data-toggle="collapse"]):not(.footer-link):hover,
+  a:not(.btn):not(.nav-link):not([data-toggle="collapse"]):not(
+    .footer-link
+  ):hover,
 .card
-  a:not(.btn):not(.nav-link):not([data-toggle="collapse"]):not(.footer-link):focus {
+  a:not(.btn):not(.nav-link):not([data-toggle="collapse"]):not(
+    .footer-link
+  ):focus {
   border-color: #444;
 }
 .card-collapse .card .card-header {
@@ -6722,6 +6730,10 @@ img {
 .card-testimonial {
   margin-top: 60px;
   text-align: center;
+}
+
+.card-profile {
+  min-height: 750px;
 }
 .card-profile .card-body .card-title,
 .card-testimonial .card-body .card-title {
