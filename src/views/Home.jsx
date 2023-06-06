@@ -35,7 +35,7 @@ import daveImg from "../assets/img/dave-headshot.png";
 import chadImg from "../assets/img/chad-headshot.png";
 import katelynnImg from "../assets/img/katelynn-headshot.png";
 import ashleyImg from "../assets/img/ashley-headshot.png";
-import jessicaImg from "../assets/img/jesssica-headshot.jpg";
+import jessicaImg from "../assets/img/jessica-headshot.jpg";
 
 import headerLogo from "../assets/img/logo-white.png";
 
