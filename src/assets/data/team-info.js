@@ -42,6 +42,7 @@ const teamInfo = [
   {
     id: 5,
     name: "Jessica Henderson",
+    firstName: "Jessica",
     title: "Mortgage Loan Originator",
     license: "NMLS # 1635220",
     img: "../assets/img/jessica-headshot.jpg",
