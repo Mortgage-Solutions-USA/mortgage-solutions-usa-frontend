@@ -31,6 +31,14 @@ const teamInfo = [
     img: "../assets/img/chad-headshot.png",
     desc: "Buying a home or investment property is an important decision that can be both exciting and daunting. That's why I'm here to help. With my many years of experience in originating residential mortgage loans, I have the knowledge and expertise to ensure you get the best loan solution for your situation. As a broker, I have access to multiple wholesale lenders and hundreds of loan programs, including construction loans with as little as 5% down. But I'm more than just a professional - I'm a father of an amazing son and a devoted husband to my wife, who is also in the real estate business. We work together to help our clients through a smooth transaction, while leveraging our time to spend with our son. If you're ready to take the next step, you can get started quickly by completing an application through our secure website or by giving me a call. I'm available to answer any questions, 7 DAYS A WEEK. Let me help you realize your dream of owning your own home or investing in a property to add to your portfolio. I look forward to helping you on your journey to owning your dream property!",
   },
+  {
+    name: "Jessica Henderson",
+    title: "Mortgage Loan Originator",
+    license: "NMLS # 1635220",
+    url: "https://jessy.zipforhome.com/",
+    img: "../assets/img/jessica-headshot.png",
+    desc: "Hello! My name is Jessy Henderson! I have been in the banking/consumer loan industry for 9 years. In 2020 I became the Asst Vice president of the Financial Institution I was working at and quickly realized that I love helping people be able to buy their dream home! I have assisted loan officers with processing loans and I am now a licensed mortgage loan originator! I was raised in a small German town 20 minutes east of Jefferson City named Frankenstein, Missouri (yes, that is the real name)!  I have lived in the Jefferson City area since graduating high school and can’t imagine living anywhere but here!  I have 3 kids, ages 22,21 and 14.  A French bulldog named Sebastian and a cat I found on the highway named Ariel.  I enjoy being outdoors as much as I can and you can often find me kayaking, learning to use a stand-up board, sitting poolside and making memories with my children!Buying a home is one of the biggest and most important purchases you will ever do, I’m here to make that experience as easy, fun and stressless as I can.  I am excited to be able to help you and your family find your first home and your dream home!",
+  },
 ];
 
 export default teamInfo;
